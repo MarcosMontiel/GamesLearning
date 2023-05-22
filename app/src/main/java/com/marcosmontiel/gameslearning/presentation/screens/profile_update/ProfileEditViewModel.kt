@@ -101,7 +101,7 @@ class ProfileEditViewModel @Inject constructor(
     }
 
     fun onGalleryChoose() = viewModelScope.launch {
-        val result: Uri = activityHandler.getContent(type = "image/*") ?: return@launch
+        val result: Uri = activityHandler.getContent() ?: return@launch
         val file = ComposeFileProvider.createFileFromUri(
             context = context,
             uri = result

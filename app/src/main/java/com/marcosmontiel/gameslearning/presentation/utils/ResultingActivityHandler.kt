@@ -17,14 +17,29 @@ import javax.inject.Inject
 class ResultingActivityHandler @Inject constructor() {
     private var _callback by mutableStateOf<(@Composable () -> Unit)?>(null)
 
-    suspend fun takePicturePreview(maxAttempts: Int = 10, delayMillis: Long = 200): Bitmap? {
-        return request(ActivityResultContracts.TakePicturePreview(), maxAttempts, delayMillis) {
+    suspend fun takePicturePreview(
+        maxAttempts: Int = 10,
+        delayMillis: Long = 200
+    ): Bitmap? {
+        return request(
+            ActivityResultContracts.TakePicturePreview(),
+            maxAttempts,
+            delayMillis
+        ) {
             it.launch()
         }
     }
 
-    suspend fun getContent(type: String, maxAttempts: Int = 10, delayMillis: Long = 200): Uri? {
-        return request(ActivityResultContracts.GetContent(), maxAttempts, delayMillis) {
+    suspend fun getContent(
+        type: String = "image/*",
+        maxAttempts: Int = 10,
+        delayMillis: Long = 200
+    ): Uri? {
+        return request(
+            ActivityResultContracts.GetContent(),
+            maxAttempts,
+            delayMillis
+        ) {
             it.launch(type)
         }
     }
