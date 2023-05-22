@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "810579433523",
+    "project_id": "games-learning",
+    "storage_bucket": "games-learning.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:810579433523:android:6bdb819f3591524a54ab46",
+        "android_client_info": {
+          "package_name": "com.marcosmontiel.gameslearning"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "810579433523-8qoksi8e4vpjla47bgk7m67kts11lov6.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDI9Y6bND3iwMOTjxA9cyCWh-iuKcfhoO8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "810579433523-8qoksi8e4vpjla47bgk7m67kts11lov6.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
