@@ -70,7 +70,6 @@ fun DefaultProfileIconsChooser(
     ) {
 
         DefaultProfileIcon(
-            modifier = Modifier,
             icon = Icons.Rounded.PhotoCamera,
             title = "Cámara",
             onClickAction = {
@@ -81,7 +80,6 @@ fun DefaultProfileIconsChooser(
         Spacer(modifier = Modifier.weight(weight = 1f))
 
         DefaultProfileIcon(
-            modifier = Modifier,
             icon = Icons.Rounded.Collections,
             title = "Galería",
             onClickAction = {
@@ -94,7 +92,7 @@ fun DefaultProfileIconsChooser(
 
 @Composable
 fun DefaultProfileIcon(
-    modifier: Modifier,
+    modifier: Modifier = Modifier,
     icon: ImageVector,
     title: String,
     onClickAction: () -> Unit
