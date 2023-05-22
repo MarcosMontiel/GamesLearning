@@ -24,7 +24,6 @@ fun ProfileEditScreen(navController: NavHostController) {
 
             DefaultTopBar(
                 title = "Editar perfil",
-                upAvailable = true,
                 navController = navController
             )
 

@@ -21,7 +21,6 @@ fun RegisterScreen(navController: NavHostController) {
 
             DefaultTopBar(
                 title = "Nuevo usuario",
-                upAvailable = true,
                 navController = navController
             )
 

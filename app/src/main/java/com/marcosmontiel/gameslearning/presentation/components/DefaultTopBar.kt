@@ -14,7 +14,7 @@ import com.marcosmontiel.gameslearning.presentation.ui.theme.Gray200
 @Composable
 fun DefaultTopBar(
     title: String,
-    upAvailable: Boolean = false,
+    upAvailable: Boolean = true,
     navController: NavHostController? = null
 ) {
     TopAppBar(
