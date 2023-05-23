@@ -3,14 +3,15 @@ package com.marcosmontiel.gameslearning.presentation.screens.profile
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material.Scaffold
 import androidx.compose.material.ScaffoldState
-import androidx.compose.material.Text
 import androidx.compose.material.rememberScaffoldState
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.navigation.NavHostController
 import com.marcosmontiel.gameslearning.presentation.screens.profile.components.ProfileContent
+import kotlinx.coroutines.ExperimentalCoroutinesApi
 
 @Composable
+@ExperimentalCoroutinesApi
 fun ProfileScreen(navController: NavHostController) {
     val scaffoldState: ScaffoldState = rememberScaffoldState()
 
