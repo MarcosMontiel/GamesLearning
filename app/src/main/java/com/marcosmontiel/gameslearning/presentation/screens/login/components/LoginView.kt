@@ -13,7 +13,6 @@ import androidx.navigation.NavHostController
 import com.marcosmontiel.gameslearning.domain.model.Response
 import com.marcosmontiel.gameslearning.presentation.components.DefaultProgressIndicator
 import com.marcosmontiel.gameslearning.presentation.navigation.Graph
-import com.marcosmontiel.gameslearning.presentation.navigation.RootRoutes
 import com.marcosmontiel.gameslearning.presentation.screens.login.LoginViewModel
 
 @Composable
@@ -45,7 +44,7 @@ fun LoginView(
                 is Response.Success -> {
 
                     LaunchedEffect(Unit) {
-                        navController.navigate(route = RootRoutes.Home.route) {
+                        navController.navigate(route = Graph.HOME) {
                             popUpTo(route = Graph.AUTHENTICATION) { inclusive = true }
                         }
                     }
