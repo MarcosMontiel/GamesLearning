@@ -12,7 +12,8 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavHostController
 import com.marcosmontiel.gameslearning.domain.model.Response
 import com.marcosmontiel.gameslearning.presentation.components.DefaultProgressIndicator
-import com.marcosmontiel.gameslearning.presentation.navigation.AppRoutes
+import com.marcosmontiel.gameslearning.presentation.navigation.AuthRoutes.Login
+import com.marcosmontiel.gameslearning.presentation.navigation.HomeRoutes.Profile
 import com.marcosmontiel.gameslearning.presentation.screens.register.RegisterViewModel
 
 @Composable
@@ -45,8 +46,8 @@ fun RegisterView(
 
                     LaunchedEffect(Unit) {
                         viewModel.createProfile()
-                        navController.popBackStack(route = AppRoutes.Login.route, inclusive = true)
-                        navController.navigate(route = AppRoutes.Profile.route)
+                        navController.popBackStack(route = Login.route, inclusive = true)
+                        navController.navigate(route = Profile.route)
                     }
 
                 }

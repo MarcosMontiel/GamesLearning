@@ -9,11 +9,13 @@ import androidx.compose.material.Surface
 import androidx.compose.ui.Modifier
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
-import com.marcosmontiel.gameslearning.presentation.navigation.AppNavigation
+import com.marcosmontiel.gameslearning.presentation.navigation.RootNavGraph
 import com.marcosmontiel.gameslearning.presentation.ui.theme.GamesLearningTheme
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.ExperimentalCoroutinesApi
 
 @AndroidEntryPoint
+@ExperimentalCoroutinesApi
 class MainActivity : ComponentActivity() {
     private lateinit var navController: NavHostController
 
@@ -27,7 +29,7 @@ class MainActivity : ComponentActivity() {
                     color = MaterialTheme.colors.background
                 ) {
                     navController = rememberNavController()
-                    AppNavigation(navController = navController)
+                    RootNavGraph(navController = navController)
                 }
             }
         }

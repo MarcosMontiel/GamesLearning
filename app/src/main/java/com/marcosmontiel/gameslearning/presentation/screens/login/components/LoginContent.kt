@@ -27,7 +27,7 @@ import com.marcosmontiel.gameslearning.R
 import com.marcosmontiel.gameslearning.presentation.components.DefaultButton
 import com.marcosmontiel.gameslearning.presentation.components.DefaultPasswordTextField
 import com.marcosmontiel.gameslearning.presentation.components.DefaultTextField
-import com.marcosmontiel.gameslearning.presentation.navigation.AppRoutes.Register
+import com.marcosmontiel.gameslearning.presentation.navigation.AuthRoutes.Register
 import com.marcosmontiel.gameslearning.presentation.screens.login.LoginState
 import com.marcosmontiel.gameslearning.presentation.screens.login.LoginViewModel
 import com.marcosmontiel.gameslearning.presentation.ui.theme.Blue500
