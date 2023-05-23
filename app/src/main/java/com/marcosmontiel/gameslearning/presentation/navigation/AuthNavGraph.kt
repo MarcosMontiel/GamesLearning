@@ -21,3 +21,11 @@ fun NavGraphBuilder.authNavGraph(navController: NavHostController) {
 
     }
 }
+
+sealed class AuthRoutes(val route: String) {
+
+    object Login : AuthRoutes(route = "login")
+
+    object Register : AuthRoutes(route = "register")
+
+}

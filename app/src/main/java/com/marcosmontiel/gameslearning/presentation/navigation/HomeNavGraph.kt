@@ -1,6 +1,10 @@
 package com.marcosmontiel.gameslearning.presentation.navigation
 
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.rounded.List
+import androidx.compose.material.icons.rounded.Person
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
@@ -30,4 +34,26 @@ fun HomeNavGraph(navController: NavHostController) {
         }
 
     }
+}
+
+sealed class HomeRoutes(val icon: ImageVector, val title: String, val route: String) {
+
+    object Posts : HomeRoutes(
+        icon = Icons.Rounded.List,
+        title = "Posts",
+        route = "posts"
+    )
+
+    object MyPosts : HomeRoutes(
+        icon = Icons.Rounded.List,
+        title = "Mis posts",
+        route = "my_posts"
+    )
+
+    object Profile : HomeRoutes(
+        icon = Icons.Rounded.Person,
+        title = "Mi perfil",
+        route = "profile"
+    )
+
 }
