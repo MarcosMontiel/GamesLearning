@@ -1,4 +1,4 @@
-package com.marcosmontiel.gameslearning.presentation.screens.profile_update.components
+package com.marcosmontiel.gameslearning.presentation.screens.profile_edit.components
 
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -17,8 +17,8 @@ import androidx.constraintlayout.compose.ConstraintLayout
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.marcosmontiel.gameslearning.presentation.components.*
 import com.marcosmontiel.gameslearning.presentation.screens.login.components.GenericLoginTitles
-import com.marcosmontiel.gameslearning.presentation.screens.profile_update.ProfileEditState
-import com.marcosmontiel.gameslearning.presentation.screens.profile_update.ProfileEditViewModel
+import com.marcosmontiel.gameslearning.presentation.screens.profile_edit.ProfileEditState
+import com.marcosmontiel.gameslearning.presentation.screens.profile_edit.ProfileEditViewModel
 import com.marcosmontiel.gameslearning.presentation.ui.theme.Blue500
 import com.marcosmontiel.gameslearning.presentation.ui.theme.Gray500
 import com.marcosmontiel.gameslearning.presentation.ui.theme.Gray800

@@ -6,8 +6,10 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import com.marcosmontiel.gameslearning.presentation.navigation.RootRoutes.Home
 import com.marcosmontiel.gameslearning.presentation.screens.home.HomeScreen
+import kotlinx.coroutines.ExperimentalCoroutinesApi
 
 @Composable
+@ExperimentalCoroutinesApi
 fun RootNavGraph(navController: NavHostController) {
     NavHost(
         navController = navController,
@@ -26,6 +28,6 @@ fun RootNavGraph(navController: NavHostController) {
 
 sealed class RootRoutes(val route: String) {
 
-    object Home: RootRoutes(route = "home")
+    object Home : RootRoutes(route = "home")
 
 }

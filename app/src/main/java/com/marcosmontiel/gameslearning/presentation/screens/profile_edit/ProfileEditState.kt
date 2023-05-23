@@ -1,4 +1,4 @@
-package com.marcosmontiel.gameslearning.presentation.screens.profile_update
+package com.marcosmontiel.gameslearning.presentation.screens.profile_edit
 
 data class ProfileEditState(
     val fieldsStatus: Boolean = true,

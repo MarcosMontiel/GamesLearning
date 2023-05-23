@@ -1,4 +1,4 @@
-package com.marcosmontiel.gameslearning.presentation.screens.profile_update
+package com.marcosmontiel.gameslearning.presentation.screens.profile_edit
 
 import android.content.Context
 import android.graphics.Bitmap

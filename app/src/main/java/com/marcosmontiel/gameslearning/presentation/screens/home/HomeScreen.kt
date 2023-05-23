@@ -13,8 +13,10 @@ import androidx.navigation.compose.rememberNavController
 import com.marcosmontiel.gameslearning.presentation.navigation.HomeNavGraph
 import com.marcosmontiel.gameslearning.presentation.navigation.HomeRoutes
 import com.marcosmontiel.gameslearning.presentation.navigation.HomeRoutes.*
+import kotlinx.coroutines.ExperimentalCoroutinesApi
 
 @Composable
+@ExperimentalCoroutinesApi
 fun HomeScreen(navController: NavHostController = rememberNavController()) {
     Scaffold(
         content = {

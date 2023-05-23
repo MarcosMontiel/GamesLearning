@@ -12,8 +12,10 @@ import com.marcosmontiel.gameslearning.presentation.navigation.HomeRoutes.*
 import com.marcosmontiel.gameslearning.presentation.screens.my_posts.MyPostsScreen
 import com.marcosmontiel.gameslearning.presentation.screens.posts.PostsScreen
 import com.marcosmontiel.gameslearning.presentation.screens.profile.ProfileScreen
+import kotlinx.coroutines.ExperimentalCoroutinesApi
 
 @Composable
+@ExperimentalCoroutinesApi
 fun HomeNavGraph(navController: NavHostController) {
     NavHost(
         navController = navController,
@@ -32,6 +34,8 @@ fun HomeNavGraph(navController: NavHostController) {
         composable(route = Profile.route) {
             ProfileScreen(navController = navController)
         }
+
+        detailsNavGraph(navController = navController)
 
     }
 }

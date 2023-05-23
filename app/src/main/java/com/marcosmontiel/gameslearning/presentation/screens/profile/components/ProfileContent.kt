@@ -23,7 +23,8 @@ import com.marcosmontiel.gameslearning.presentation.components.DefaultAvatarAsyn
 import com.marcosmontiel.gameslearning.presentation.components.DefaultAvatarImage
 import com.marcosmontiel.gameslearning.presentation.components.DefaultButton
 import com.marcosmontiel.gameslearning.presentation.navigation.AuthRoutes.Login
-import com.marcosmontiel.gameslearning.presentation.navigation.HomeRoutes
+import com.marcosmontiel.gameslearning.presentation.navigation.DetailsRoutes.ProfileEdit
+import com.marcosmontiel.gameslearning.presentation.navigation.HomeRoutes.Profile
 import com.marcosmontiel.gameslearning.presentation.screens.profile.ProfileViewModel
 import com.marcosmontiel.gameslearning.presentation.ui.theme.Gray500
 import com.marcosmontiel.gameslearning.presentation.ui.theme.Red300
@@ -143,9 +144,9 @@ fun ProfileCardContent(
             modifier = Modifier.fillMaxWidth(0.5f),
             title = "Editar datos",
             onClickAction = {
-                /*navController.navigate(
+                navController.navigate(
                     route = ProfileEdit.createArgs(profile = viewModel.convertLiveDataToJson())
-                )*/
+                )
             }
         )
 
@@ -157,7 +158,7 @@ fun ProfileCardContent(
             onClickAction = {
                 viewModel.onLogout()
                 navController.navigate(route = Login.route) {
-                    popUpTo(route = HomeRoutes.Profile.route) { inclusive = true }
+                    popUpTo(route = Profile.route) { inclusive = true }
                 }
             }
         )
