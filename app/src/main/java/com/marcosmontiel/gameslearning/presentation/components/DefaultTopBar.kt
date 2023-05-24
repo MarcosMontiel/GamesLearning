@@ -2,11 +2,12 @@ package com.marcosmontiel.gameslearning.presentation.components
 
 import androidx.compose.material.Icon
 import androidx.compose.material.IconButton
-import androidx.compose.material.Text
+import androidx.compose.material.MaterialTheme
 import androidx.compose.material.TopAppBar
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.text.font.FontWeight
 import androidx.navigation.NavHostController
 import com.marcosmontiel.gameslearning.presentation.ui.theme.Blue700
 import com.marcosmontiel.gameslearning.presentation.ui.theme.Gray200
@@ -20,7 +21,11 @@ fun DefaultTopBar(
     TopAppBar(
         title = {
 
-            Text(text = title)
+            DefaultText(
+                text = title,
+                fontWeight = FontWeight.Normal,
+                style = MaterialTheme.typography.h6
+            )
 
         },
         navigationIcon = {
