@@ -11,7 +11,6 @@ import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
@@ -186,9 +185,8 @@ fun RegisterCardContent(
 
             DefaultButton(
                 modifier = Modifier.fillMaxWidth(),
-                title = "GUARDAR",
                 isEnabled = state.saveButtonStatus,
-                fontWeight = FontWeight.Bold,
+                title = "Guardar",
                 onClickAction = {
                     viewModel.onRegisterUser()
                 }

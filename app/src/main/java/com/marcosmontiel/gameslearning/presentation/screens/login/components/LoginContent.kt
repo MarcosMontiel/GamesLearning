@@ -177,7 +177,7 @@ fun LoginCardContent(
             DefaultButton(
                 modifier = Modifier.fillMaxWidth(),
                 isEnabled = state.loginButtonStatus,
-                title = "INICIAR SESIÓN",
+                title = "Iniciar Sesión",
                 onClickAction = {
                     viewModel.onLoginClick()
                 }
