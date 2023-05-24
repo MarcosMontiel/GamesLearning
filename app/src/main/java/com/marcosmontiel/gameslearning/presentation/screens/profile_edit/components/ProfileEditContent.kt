@@ -197,8 +197,8 @@ fun ProfileCardContent(
 
             DefaultButton(
                 modifier = Modifier.fillMaxWidth(),
-                title = "ACTUALIZAR DATOS",
                 isEnabled = state.updateButtonStatus,
+                title = "Actualizar Datos",
                 fontWeight = FontWeight.Bold,
                 onClickAction = {
                     viewModel.onSavePhoto()
