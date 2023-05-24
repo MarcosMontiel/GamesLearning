@@ -7,6 +7,7 @@ import androidx.compose.material.rememberScaffoldState
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.navigation.NavHostController
+import com.marcosmontiel.gameslearning.presentation.components.DefaultTopBar
 import com.marcosmontiel.gameslearning.presentation.screens.new_post.components.NewPostContent
 
 @Composable
@@ -15,7 +16,14 @@ fun NewPostScreen(navController: NavHostController) {
 
     Scaffold(
         scaffoldState = scaffoldState,
-        topBar = {},
+        topBar = {
+
+            DefaultTopBar(
+                title = "Nuevo post",
+                navController = navController
+            )
+
+        },
         content = { paddingValues ->
 
             NewPostContent(
