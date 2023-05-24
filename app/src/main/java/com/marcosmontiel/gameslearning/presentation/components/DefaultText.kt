@@ -11,7 +11,7 @@ import com.marcosmontiel.gameslearning.presentation.ui.theme.Gray200
 
 @Composable
 fun DefaultText(
-    modifier: Modifier,
+    modifier: Modifier = Modifier,
     text: String,
     color: Color = Gray200,
     fontWeight: FontWeight = FontWeight.Bold,

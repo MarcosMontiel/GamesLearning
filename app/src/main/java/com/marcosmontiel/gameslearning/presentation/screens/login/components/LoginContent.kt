@@ -7,7 +7,6 @@ import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Card
 import androidx.compose.material.MaterialTheme
-import androidx.compose.material.Text
 import androidx.compose.material.TextButton
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -177,13 +176,13 @@ fun LoginCardContent(
 
             DefaultButton(
                 modifier = Modifier.fillMaxWidth(),
-                title = "INICIAR SESIÓN",
                 isEnabled = state.loginButtonStatus,
-                fontWeight = FontWeight.Bold,
+                title = "INICIAR SESIÓN",
                 onClickAction = {
                     viewModel.onLoginClick()
                 }
             )
+
         }
     }
 }
@@ -197,21 +196,29 @@ fun LoginFooterContent(modifier: Modifier, navController: NavHostController) {
         horizontalArrangement = Arrangement.Center,
         verticalAlignment = Alignment.CenterVertically
     ) {
-        Text(
+
+        DefaultText(
             text = "¿Aún no tienes una cuenta?",
+            fontWeight = FontWeight.Normal,
             style = MaterialTheme.typography.body2
         )
 
         Spacer(modifier = Modifier.size(8.dp))
 
-        TextButton(onClick = {
-            navController.navigate(route = Register.route)
-        }) {
-            Text(
-                text = "REGÍSTRATE",
-                fontWeight = FontWeight.Bold,
-                style = MaterialTheme.typography.body2
-            )
-        }
+        TextButton(
+            onClick = {
+                navController.navigate(route = Register.route)
+            },
+            content = {
+
+                DefaultText(
+                    text = "REGÍSTRATE",
+                    color = Blue500,
+                    style = MaterialTheme.typography.body2
+                )
+
+            }
+        )
+
     }
 }
