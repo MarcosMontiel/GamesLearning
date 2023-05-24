@@ -6,6 +6,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.TextStyle
+import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.text.font.FontWeight
 import com.marcosmontiel.gameslearning.presentation.ui.theme.Gray200
 
@@ -14,6 +15,7 @@ fun DefaultText(
     modifier: Modifier = Modifier,
     text: String,
     color: Color = Gray200,
+    fontStyle: FontStyle = FontStyle.Normal,
     fontWeight: FontWeight = FontWeight.Bold,
     style: TextStyle = MaterialTheme.typography.body1
 ) {
@@ -21,6 +23,7 @@ fun DefaultText(
         text = text,
         modifier = modifier,
         color = color,
+        fontStyle = fontStyle,
         fontWeight = fontWeight,
         style = style
     )

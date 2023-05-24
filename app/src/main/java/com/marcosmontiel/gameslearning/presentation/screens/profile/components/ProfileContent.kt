@@ -5,7 +5,6 @@ import android.content.Intent
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.MaterialTheme
-import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.livedata.observeAsState
@@ -26,6 +25,7 @@ import com.marcosmontiel.gameslearning.presentation.MainActivity
 import com.marcosmontiel.gameslearning.presentation.components.DefaultAvatarAsyncImage
 import com.marcosmontiel.gameslearning.presentation.components.DefaultAvatarImage
 import com.marcosmontiel.gameslearning.presentation.components.DefaultButton
+import com.marcosmontiel.gameslearning.presentation.components.DefaultText
 import com.marcosmontiel.gameslearning.presentation.navigation.DetailsRoutes.ProfileEdit
 import com.marcosmontiel.gameslearning.presentation.screens.profile.ProfileViewModel
 import com.marcosmontiel.gameslearning.presentation.ui.theme.Gray500
@@ -91,9 +91,8 @@ fun ProfileHeaderContent(
 
         Spacer(modifier = Modifier.size(56.dp))
 
-        Text(
+        DefaultText(
             text = "BIENVENIDO",
-            fontWeight = FontWeight.Bold,
             style = MaterialTheme.typography.h6
         )
 
@@ -132,24 +131,25 @@ fun ProfileCardContent(
 
         Spacer(modifier = Modifier.size(16.dp))
 
-        Text(
+        DefaultText(
             text = profileData.username,
             fontStyle = FontStyle.Italic,
-            style = MaterialTheme.typography.body1
+            fontWeight = FontWeight.Normal
         )
 
-        Text(
+        DefaultText(
             text = profileData.email,
             color = Gray500,
             fontStyle = FontStyle.Italic,
+            fontWeight = FontWeight.Normal,
             style = MaterialTheme.typography.body2
         )
 
-        Spacer(modifier = Modifier.size(24.dp))
+        Spacer(modifier = Modifier.size(32.dp))
 
         DefaultButton(
             modifier = Modifier.fillMaxWidth(0.5f),
-            title = "Editar datos",
+            title = "Editar Datos",
             onClickAction = {
                 navController.navigate(
                     route = ProfileEdit.createArgs(profile = viewModel.convertLiveDataToJson())
@@ -159,9 +159,9 @@ fun ProfileCardContent(
 
         DefaultButton(
             modifier = Modifier.fillMaxWidth(0.5f),
-            title = "Cerrar sesión",
             backgroundColor = Red500,
             disabledBackground = Red300,
+            title = "Cerrar Sesión",
             onClickAction = {
                 viewModel.onLogout()
                 activity?.finish()
