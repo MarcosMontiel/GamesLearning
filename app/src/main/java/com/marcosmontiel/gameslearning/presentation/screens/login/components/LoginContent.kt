@@ -16,7 +16,6 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.Dp
@@ -26,12 +25,12 @@ import androidx.navigation.NavHostController
 import com.marcosmontiel.gameslearning.R
 import com.marcosmontiel.gameslearning.presentation.components.DefaultButton
 import com.marcosmontiel.gameslearning.presentation.components.DefaultPasswordTextField
+import com.marcosmontiel.gameslearning.presentation.components.DefaultText
 import com.marcosmontiel.gameslearning.presentation.components.DefaultTextField
 import com.marcosmontiel.gameslearning.presentation.navigation.AuthRoutes.Register
 import com.marcosmontiel.gameslearning.presentation.screens.login.LoginState
 import com.marcosmontiel.gameslearning.presentation.screens.login.LoginViewModel
 import com.marcosmontiel.gameslearning.presentation.ui.theme.Blue500
-import com.marcosmontiel.gameslearning.presentation.ui.theme.Gray200
 import com.marcosmontiel.gameslearning.presentation.ui.theme.Gray500
 import com.marcosmontiel.gameslearning.presentation.ui.theme.Gray800
 
@@ -78,6 +77,7 @@ fun LoginHeaderContent(modifier: Modifier, height: Dp) {
             modifier = Modifier.fillMaxWidth(),
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
+
             ApplicationLogo(
                 modifier = Modifier.align(Alignment.CenterHorizontally),
                 logo = R.drawable.logo
@@ -85,12 +85,11 @@ fun LoginHeaderContent(modifier: Modifier, height: Dp) {
 
             Spacer(modifier = Modifier.size(16.dp))
 
-            GenericLoginTitles(
+            DefaultText(
                 modifier = Modifier.align(Alignment.CenterHorizontally),
-                title = "FIREBASE MVVM",
-                fontWeight = FontWeight.Bold,
-                style = MaterialTheme.typography.body1
+                text = "FIREBASE MVVM"
             )
+
         }
     }
 }
@@ -103,23 +102,6 @@ fun ApplicationLogo(modifier: Modifier, @DrawableRes logo: Int) {
         modifier = modifier
             .size(98.dp)
             .padding(top = 16.dp)
-    )
-}
-
-@Composable
-fun GenericLoginTitles(
-    modifier: Modifier,
-    title: String,
-    color: Color = Gray200,
-    fontWeight: FontWeight,
-    style: TextStyle
-) {
-    Text(
-        text = title,
-        modifier = modifier,
-        color = color,
-        fontWeight = fontWeight,
-        style = style
     )
 }
 
@@ -146,20 +128,17 @@ fun LoginCardContent(
                 vertical = 56.dp
             )
         ) {
-            GenericLoginTitles(
+            DefaultText(
                 modifier = Modifier,
-                title = "LOGIN",
-                fontWeight = FontWeight.Bold,
-                style = MaterialTheme.typography.body1
+                text = "LOGIN"
             )
 
             Spacer(modifier = Modifier.size(8.dp))
 
-            GenericLoginTitles(
+            DefaultText(
                 modifier = Modifier,
-                title = "Inicia sesión para continuar",
+                text = "Inicia sesión para continuar",
                 color = Gray500,
-                fontWeight = FontWeight.Bold,
                 style = MaterialTheme.typography.body2
             )
 

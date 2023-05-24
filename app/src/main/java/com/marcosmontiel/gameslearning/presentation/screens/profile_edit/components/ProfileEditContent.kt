@@ -16,7 +16,6 @@ import androidx.compose.ui.unit.dp
 import androidx.constraintlayout.compose.ConstraintLayout
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.marcosmontiel.gameslearning.presentation.components.*
-import com.marcosmontiel.gameslearning.presentation.screens.login.components.GenericLoginTitles
 import com.marcosmontiel.gameslearning.presentation.screens.profile_edit.ProfileEditState
 import com.marcosmontiel.gameslearning.presentation.screens.profile_edit.ProfileEditViewModel
 import com.marcosmontiel.gameslearning.presentation.ui.theme.Blue500
@@ -168,20 +167,17 @@ fun ProfileCardContent(
             )
         ) {
 
-            GenericLoginTitles(
+            DefaultText(
                 modifier = Modifier,
-                title = "ACTUALIZACIÓN",
-                fontWeight = FontWeight.Bold,
-                style = MaterialTheme.typography.body1
+                text = "ACTUALIZACIÓN"
             )
 
             Spacer(modifier = Modifier.size(8.dp))
 
-            GenericLoginTitles(
+            DefaultText(
                 modifier = Modifier,
-                title = "Ingresa los siguientes datos para continuar",
+                text = "Ingresa los siguientes datos para continuar",
                 color = Gray500,
-                fontWeight = FontWeight.Bold,
                 style = MaterialTheme.typography.body2
             )
 

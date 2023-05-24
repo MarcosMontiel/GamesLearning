@@ -18,8 +18,8 @@ import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.marcosmontiel.gameslearning.presentation.components.DefaultButton
 import com.marcosmontiel.gameslearning.presentation.components.DefaultPasswordTextField
+import com.marcosmontiel.gameslearning.presentation.components.DefaultText
 import com.marcosmontiel.gameslearning.presentation.components.DefaultTextField
-import com.marcosmontiel.gameslearning.presentation.screens.login.components.GenericLoginTitles
 import com.marcosmontiel.gameslearning.presentation.screens.register.RegisterState
 import com.marcosmontiel.gameslearning.presentation.screens.register.RegisterViewModel
 import com.marcosmontiel.gameslearning.presentation.ui.theme.Blue500
@@ -87,20 +87,17 @@ fun RegisterCardContent(
             )
         ) {
 
-            GenericLoginTitles(
+            DefaultText(
                 modifier = Modifier,
-                title = "REGISTRO",
-                fontWeight = FontWeight.Bold,
-                style = MaterialTheme.typography.body1
+                text = "REGISTRO"
             )
 
             Spacer(modifier = Modifier.size(8.dp))
 
-            GenericLoginTitles(
+            DefaultText(
                 modifier = Modifier,
-                title = "Ingresa los siguientes datos para continuar",
+                text = "Ingresa los siguientes datos para continuar",
                 color = Gray500,
-                fontWeight = FontWeight.Bold,
                 style = MaterialTheme.typography.body2
             )
 
