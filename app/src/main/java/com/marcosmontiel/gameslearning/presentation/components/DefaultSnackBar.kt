@@ -10,6 +10,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import com.marcosmontiel.gameslearning.presentation.ui.theme.Gray200
 import com.marcosmontiel.gameslearning.presentation.ui.theme.Gray900
@@ -64,8 +65,9 @@ fun DefaultSnackBar(
                     Spacer(modifier = Modifier.size(8.dp))
                 }
 
-                Text(
+                DefaultText(
                     text = message,
+                    fontWeight = FontWeight.Normal,
                     style = MaterialTheme.typography.body2
                 )
 

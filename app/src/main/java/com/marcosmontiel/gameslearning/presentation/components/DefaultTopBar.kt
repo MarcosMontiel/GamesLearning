@@ -19,9 +19,12 @@ fun DefaultTopBar(
 ) {
     TopAppBar(
         title = {
+
             Text(text = title)
+
         },
         navigationIcon = {
+
             if (upAvailable) {
                 IconButton(onClick = {
                     navController?.popBackStack()
@@ -33,6 +36,7 @@ fun DefaultTopBar(
                     )
                 }
             }
+
         },
         backgroundColor = Blue700
     )

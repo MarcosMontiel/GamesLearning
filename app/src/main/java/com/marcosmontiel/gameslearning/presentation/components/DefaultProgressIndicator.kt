@@ -20,6 +20,8 @@ fun DefaultProgressIndicator(
             .fillMaxSize()
             .background(color = background.copy(alpha = 0.7f))
     ) {
-        CircularProgressIndicator(modifier = Modifier.align(Alignment.Center))
+        CircularProgressIndicator(
+            modifier = Modifier.align(Alignment.Center)
+        )
     }
 }

@@ -4,7 +4,6 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.MaterialTheme
-import androidx.compose.material.Text
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.rounded.Collections
 import androidx.compose.material.icons.rounded.PhotoCamera
@@ -13,6 +12,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import com.marcosmontiel.gameslearning.presentation.ui.theme.Blue500
 import com.marcosmontiel.gameslearning.presentation.ui.theme.Gray800
@@ -35,15 +35,14 @@ fun DefaultProfilePhotoPicker(
 
         Column(modifier = Modifier.fillMaxWidth()) {
 
-            Text(
+            DefaultText(
                 text = "Foto del perfil",
-                style = MaterialTheme.typography.body1
+                fontWeight = FontWeight.Normal
             )
 
             Spacer(modifier = Modifier.size(24.dp))
 
             DefaultProfileIconsChooser(
-                modifier = Modifier.fillMaxWidth(),
                 onGalleryChoose = {
                     onGalleryChoose()
                 },
@@ -59,12 +58,14 @@ fun DefaultProfilePhotoPicker(
 
 @Composable
 fun DefaultProfileIconsChooser(
-    modifier: Modifier,
+    modifier: Modifier = Modifier,
     onGalleryChoose: () -> Unit,
     onTakePicture: () -> Unit
 ) {
     Row(
-        modifier = modifier.padding(horizontal = 16.dp),
+        modifier = modifier
+            .fillMaxWidth()
+            .padding(horizontal = 16.dp),
         horizontalArrangement = Arrangement.Center,
         verticalAlignment = Alignment.CenterVertically
     ) {
@@ -114,8 +115,9 @@ fun DefaultProfileIcon(
 
         Spacer(modifier = Modifier.size(8.dp))
 
-        Text(
+        DefaultText(
             text = title,
+            fontWeight = FontWeight.Normal,
             style = MaterialTheme.typography.body2
         )
 

@@ -5,6 +5,7 @@ import androidx.compose.material.*
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import com.marcosmontiel.gameslearning.presentation.ui.theme.Gray200
 import com.marcosmontiel.gameslearning.presentation.ui.theme.Gray900
@@ -46,17 +47,34 @@ fun DefaultSnackBar(
 ) {
     Snackbar(
         action = {
-            TextButton(onClick = {
-                onClickAction()
-            }) {
-                Text(text = action)
-            }
+
+            TextButton(
+                onClick = {
+                    onClickAction()
+                },
+                content = {
+
+                    DefaultText(
+                        text = action,
+                        fontWeight = FontWeight.Normal,
+                        style = MaterialTheme.typography.body2
+                    )
+
+                }
+            )
+
         },
         backgroundColor = background,
         contentColor = content,
         elevation = 6.dp,
         content = {
-            Text(text = message)
+
+            DefaultText(
+                text = message,
+                fontWeight = FontWeight.Normal,
+                style = MaterialTheme.typography.body2
+            )
+
         }
     )
 }
