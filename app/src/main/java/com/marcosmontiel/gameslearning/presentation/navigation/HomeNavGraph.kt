@@ -23,12 +23,12 @@ fun HomeNavGraph(navController: NavHostController) {
         route = Graph.HOME
     ) {
 
-        composable(route = Posts.route) {
-            PostsScreen(navController = navController)
-        }
-
         composable(route = MyPosts.route) {
             MyPostsScreen(navController = navController)
+        }
+
+        composable(route = Posts.route) {
+            PostsScreen(navController = navController)
         }
 
         composable(route = Profile.route) {
@@ -42,16 +42,16 @@ fun HomeNavGraph(navController: NavHostController) {
 
 sealed class HomeRoutes(val icon: ImageVector, val title: String, val route: String) {
 
-    object Posts : HomeRoutes(
-        icon = Icons.Rounded.List,
-        title = "Posts",
-        route = "posts"
-    )
-
     object MyPosts : HomeRoutes(
         icon = Icons.Rounded.List,
         title = "Mis posts",
         route = "my_posts"
+    )
+
+    object Posts : HomeRoutes(
+        icon = Icons.Rounded.List,
+        title = "Posts",
+        route = "posts"
     )
 
     object Profile : HomeRoutes(
