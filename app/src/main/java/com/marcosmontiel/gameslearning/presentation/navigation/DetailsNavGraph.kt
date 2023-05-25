@@ -30,7 +30,7 @@ fun NavGraphBuilder.detailsNavGraph(navController: NavHostController) {
 
 sealed class DetailsRoutes(val route: String) {
 
-    object NewPost : DetailsRoutes(route = "new_post")
+    object NewPost : DetailsRoutes(route = "posts/new")
 
     object ProfileEdit : DetailsRoutes(route = "profile/edit/{profile}") {
         fun createArgs(profile: String): String = "profile/edit/$profile"
