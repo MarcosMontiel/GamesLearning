@@ -47,13 +47,16 @@ fun DefaultAvatarIconButton(
                 shape = shape
             )
             .size(buttonSize),
-        enabled = isEnabled
-    ) {
-        Icon(
-            imageVector = icon,
-            contentDescription = "camera",
-            modifier = Modifier.size(iconSize),
-            tint = iconColor
-        )
-    }
+        enabled = isEnabled,
+        content = {
+
+            Icon(
+                imageVector = icon,
+                contentDescription = "camera",
+                modifier = Modifier.size(iconSize),
+                tint = iconColor
+            )
+
+        }
+    )
 }
