@@ -1,6 +1,5 @@
 package com.marcosmontiel.gameslearning.presentation.screens.register.components
 
-import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Card
@@ -12,16 +11,11 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.input.KeyboardType
-import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
-import com.marcosmontiel.gameslearning.presentation.components.DefaultButton
-import com.marcosmontiel.gameslearning.presentation.components.DefaultPasswordTextField
-import com.marcosmontiel.gameslearning.presentation.components.DefaultText
-import com.marcosmontiel.gameslearning.presentation.components.DefaultTextField
+import com.marcosmontiel.gameslearning.presentation.components.*
 import com.marcosmontiel.gameslearning.presentation.screens.register.RegisterState
 import com.marcosmontiel.gameslearning.presentation.screens.register.RegisterViewModel
-import com.marcosmontiel.gameslearning.presentation.ui.theme.Blue500
 import com.marcosmontiel.gameslearning.presentation.ui.theme.Gray500
 import com.marcosmontiel.gameslearning.presentation.ui.theme.Gray800
 
@@ -35,8 +29,10 @@ fun RegisterContent(
 
     Box(modifier = modifier.padding(paddingValues = paddingValues)) {
 
-        RegisterHeaderBackground(
-            modifier = Modifier.align(Alignment.TopCenter)
+        DefaultBackgroundHeader(
+            modifier = Modifier.align(Alignment.TopCenter),
+            height = 224.dp,
+            content = {}
         )
 
         RegisterCardContent(
@@ -47,16 +43,6 @@ fun RegisterContent(
         )
 
     }
-}
-
-@Composable
-fun RegisterHeaderBackground(modifier: Modifier, height: Dp = 224.dp) {
-    Box(
-        modifier = modifier
-            .fillMaxWidth()
-            .height(height)
-            .background(Blue500)
-    )
 }
 
 @Composable

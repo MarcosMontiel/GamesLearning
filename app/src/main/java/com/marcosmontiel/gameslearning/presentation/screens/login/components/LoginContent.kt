@@ -2,7 +2,6 @@ package com.marcosmontiel.gameslearning.presentation.screens.login.components
 
 import androidx.annotation.DrawableRes
 import androidx.compose.foundation.Image
-import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Card
@@ -17,15 +16,11 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.KeyboardType
-import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavHostController
 import com.marcosmontiel.gameslearning.R
-import com.marcosmontiel.gameslearning.presentation.components.DefaultButton
-import com.marcosmontiel.gameslearning.presentation.components.DefaultPasswordTextField
-import com.marcosmontiel.gameslearning.presentation.components.DefaultText
-import com.marcosmontiel.gameslearning.presentation.components.DefaultTextField
+import com.marcosmontiel.gameslearning.presentation.components.*
 import com.marcosmontiel.gameslearning.presentation.navigation.AuthRoutes.Register
 import com.marcosmontiel.gameslearning.presentation.screens.login.LoginState
 import com.marcosmontiel.gameslearning.presentation.screens.login.LoginViewModel
@@ -44,9 +39,17 @@ fun LoginContent(
 
     Box(modifier = modifier.padding(paddingValues = paddingValues)) {
 
-        LoginHeaderContent(
+        DefaultBackgroundHeader(
             modifier = Modifier.align(Alignment.TopCenter),
-            height = 280.dp
+            content = {
+
+                LoginHeaderContent()
+
+            }
+        )
+
+        LoginHeaderContent(
+            modifier = Modifier.align(Alignment.TopCenter)
         )
 
         LoginCardContent(
@@ -65,31 +68,24 @@ fun LoginContent(
 }
 
 @Composable
-fun LoginHeaderContent(modifier: Modifier, height: Dp) {
-    Box(
-        modifier = modifier
-            .fillMaxWidth()
-            .height(height)
-            .background(Blue500)
+fun LoginHeaderContent(modifier: Modifier = Modifier) {
+    Column(
+        modifier = modifier.fillMaxWidth(),
+        horizontalAlignment = Alignment.CenterHorizontally
     ) {
-        Column(
-            modifier = Modifier.fillMaxWidth(),
-            horizontalAlignment = Alignment.CenterHorizontally
-        ) {
 
-            ApplicationLogo(
-                modifier = Modifier.align(Alignment.CenterHorizontally),
-                logo = R.drawable.logo
-            )
+        ApplicationLogo(
+            modifier = Modifier.align(Alignment.CenterHorizontally),
+            logo = R.drawable.logo
+        )
 
-            Spacer(modifier = Modifier.size(16.dp))
+        Spacer(modifier = Modifier.size(16.dp))
 
-            DefaultText(
-                modifier = Modifier.align(Alignment.CenterHorizontally),
-                text = "FIREBASE MVVM"
-            )
+        DefaultText(
+            modifier = Modifier.align(Alignment.CenterHorizontally),
+            text = "FIREBASE MVVM"
+        )
 
-        }
     }
 }
 
