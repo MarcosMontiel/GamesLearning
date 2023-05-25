@@ -15,20 +15,17 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavHostController
 import com.marcosmontiel.gameslearning.R
 import com.marcosmontiel.gameslearning.domain.model.User
 import com.marcosmontiel.gameslearning.presentation.MainActivity
-import com.marcosmontiel.gameslearning.presentation.components.DefaultAvatarAsyncImage
-import com.marcosmontiel.gameslearning.presentation.components.DefaultAvatarImage
-import com.marcosmontiel.gameslearning.presentation.components.DefaultButton
-import com.marcosmontiel.gameslearning.presentation.components.DefaultText
+import com.marcosmontiel.gameslearning.presentation.components.*
 import com.marcosmontiel.gameslearning.presentation.navigation.DetailsRoutes.ProfileEdit
 import com.marcosmontiel.gameslearning.presentation.screens.profile.ProfileViewModel
 import com.marcosmontiel.gameslearning.presentation.ui.theme.Gray500
+import com.marcosmontiel.gameslearning.presentation.ui.theme.Gray900
 import com.marcosmontiel.gameslearning.presentation.ui.theme.Red300
 import com.marcosmontiel.gameslearning.presentation.ui.theme.Red500
 import kotlinx.coroutines.ExperimentalCoroutinesApi
@@ -45,8 +42,21 @@ fun ProfileContent(
 
     Box(modifier = modifier.padding(paddingValues = paddingValues)) {
 
-        ProfileHeaderBackground(
-            modifier = Modifier.align(Alignment.TopCenter)
+        DefaultBackgroundHeader(
+            modifier = Modifier.align(Alignment.TopCenter),
+            height = 218.dp,
+            color = Gray900,
+            content = {
+
+                Image(
+                    painter = painterResource(id = R.drawable.background),
+                    contentDescription = "background image",
+                    modifier = Modifier.fillMaxSize(),
+                    contentScale = ContentScale.Crop,
+                    alpha = 0.6f
+                )
+
+            }
         )
 
         ProfileHeaderContent(
@@ -61,21 +71,6 @@ fun ProfileContent(
             navController = navController
         )
 
-    }
-}
-
-@Composable
-fun ProfileHeaderBackground(modifier: Modifier, height: Dp = 218.dp) {
-    Box(modifier = modifier) {
-        Image(
-            painter = painterResource(id = R.drawable.background),
-            contentDescription = "background image",
-            modifier = Modifier
-                .fillMaxWidth()
-                .height(height),
-            contentScale = ContentScale.Crop,
-            alpha = 0.6f
-        )
     }
 }
 

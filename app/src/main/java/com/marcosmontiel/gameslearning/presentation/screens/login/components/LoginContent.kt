@@ -1,7 +1,5 @@
 package com.marcosmontiel.gameslearning.presentation.screens.login.components
 
-import androidx.annotation.DrawableRes
-import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Card
@@ -13,7 +11,6 @@ import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.dp
@@ -74,9 +71,11 @@ fun LoginHeaderContent(modifier: Modifier = Modifier) {
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
 
-        ApplicationLogo(
-            modifier = Modifier.align(Alignment.CenterHorizontally),
-            logo = R.drawable.logo
+        DefaultIconRes(
+            modifier = Modifier
+                .align(Alignment.CenterHorizontally)
+                .padding(top = 16.dp),
+            drawable = R.drawable.logo
         )
 
         Spacer(modifier = Modifier.size(16.dp))
@@ -87,17 +86,6 @@ fun LoginHeaderContent(modifier: Modifier = Modifier) {
         )
 
     }
-}
-
-@Composable
-fun ApplicationLogo(modifier: Modifier, @DrawableRes logo: Int) {
-    Image(
-        painter = painterResource(id = logo),
-        contentDescription = "main logo",
-        modifier = modifier
-            .size(98.dp)
-            .padding(top = 16.dp)
-    )
 }
 
 @Composable
