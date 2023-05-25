@@ -45,8 +45,13 @@ fun RegisterView(
 
                     LaunchedEffect(Unit) {
                         viewModel.createProfile()
-                        navController.popBackStack(route = Graph.AUTHENTICATION, inclusive = true)
-                        navController.navigate(route = Graph.HOME)
+
+                        // Delete all destinations, including the target destination.
+                        //navController.popBackStack(route = Graph.AUTHENTICATION, inclusive = true)
+
+                        navController.navigate(route = Graph.HOME) {
+                            popUpTo(route = Graph.AUTHENTICATION) { inclusive = true }
+                        }
                     }
 
                 }
