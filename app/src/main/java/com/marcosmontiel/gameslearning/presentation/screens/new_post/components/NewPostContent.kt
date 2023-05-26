@@ -15,6 +15,7 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavHostController
 import com.marcosmontiel.gameslearning.R
 import com.marcosmontiel.gameslearning.presentation.components.*
+import com.marcosmontiel.gameslearning.presentation.screens.new_post.NewPostState
 import com.marcosmontiel.gameslearning.presentation.screens.new_post.NewPostViewModel
 import com.marcosmontiel.gameslearning.presentation.ui.theme.Gray800
 
@@ -30,6 +31,8 @@ fun NewPostContent(
     navController: NavHostController,
     paddingValues: PaddingValues
 ) {
+    val state: NewPostState = viewModel.state
+
     Box(modifier = modifier.padding(paddingValues = paddingValues)) {
 
         DefaultBackgroundHeader(
@@ -38,6 +41,7 @@ fun NewPostContent(
 
         NewPostCardContent(
             modifier = Modifier.align(Alignment.Center),
+            state = state,
             viewModel = viewModel,
             background = Gray800
         )
@@ -48,6 +52,7 @@ fun NewPostContent(
 @Composable
 fun NewPostCardContent(
     modifier: Modifier,
+    state: NewPostState,
     viewModel: NewPostViewModel,
     background: Color
 ) {
@@ -73,24 +78,26 @@ fun NewPostCardContent(
         ) {
 
             DefaultTextField(modifier = Modifier.fillMaxWidth(),
-                isEnabled = true,
+                isEnabled = state.fieldsStatus,
                 placeholder = "Nombre del juego",
                 value = "",
                 keyboardType = KeyboardType.Text,
                 onValueChangeAction = {
 
-                })
+                }
+            )
 
             Spacer(modifier = Modifier.size(16.dp))
 
             DefaultTextField(modifier = Modifier.fillMaxWidth(),
-                isEnabled = true,
+                isEnabled = state.fieldsStatus,
                 placeholder = "Descripción",
                 value = "",
                 keyboardType = KeyboardType.Text,
                 onValueChangeAction = {
 
-                })
+                }
+            )
 
             Spacer(modifier = Modifier.size(16.dp))
 
@@ -126,9 +133,11 @@ fun CategoryOptions(modifier: Modifier, categories: List<Category>) {
     val scrollState = rememberScrollState()
 
     Box(modifier = modifier.height(164.dp)) {
-        Column(modifier = Modifier
-            .fillMaxSize()
-            .verticalScroll(scrollState)) {
+        Column(
+            modifier = Modifier
+                .fillMaxSize()
+                .verticalScroll(scrollState)
+        ) {
 
             categories.forEach { category ->
 
