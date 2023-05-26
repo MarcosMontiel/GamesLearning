@@ -1,7 +1,9 @@
 package com.marcosmontiel.gameslearning.presentation.screens.new_post.components
 
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.Card
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -101,14 +103,10 @@ fun NewPostCardContent(
 
             Spacer(modifier = Modifier.size(16.dp))
 
-            categories.forEach { category ->
-
-                DefaultRadioButton(
-                    modifier = Modifier.fillMaxWidth(),
-                    item = category
-                )
-
-            }
+            CategoryOptions(
+                modifier = Modifier.fillMaxWidth(),
+                categories = categories
+            )
 
             Spacer(modifier = Modifier.size(8.dp))
 
@@ -118,6 +116,28 @@ fun NewPostCardContent(
                 title = "Guardar",
                 onClickAction = {}
             )
+
+        }
+    }
+}
+
+@Composable
+fun CategoryOptions(modifier: Modifier, categories: List<Category>) {
+    val scrollState = rememberScrollState()
+
+    Box(modifier = modifier.height(200.dp)) {
+        Column(modifier = Modifier
+            .fillMaxSize()
+            .verticalScroll(scrollState)) {
+
+            categories.forEach { category ->
+
+                DefaultRadioButton(
+                    modifier = Modifier.fillMaxWidth(),
+                    item = category
+                )
+
+            }
 
         }
     }
