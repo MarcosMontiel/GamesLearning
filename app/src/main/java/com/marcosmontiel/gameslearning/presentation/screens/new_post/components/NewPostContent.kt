@@ -108,12 +108,12 @@ fun NewPostCardContent(
                 categories = categories
             )
 
-            Spacer(modifier = Modifier.size(8.dp))
+            Spacer(modifier = Modifier.size(16.dp))
 
             DefaultButton(
                 modifier = Modifier.fillMaxWidth(),
                 isEnabled = false,
-                title = "Guardar",
+                title = "Publicar",
                 onClickAction = {}
             )
 
@@ -125,7 +125,7 @@ fun NewPostCardContent(
 fun CategoryOptions(modifier: Modifier, categories: List<Category>) {
     val scrollState = rememberScrollState()
 
-    Box(modifier = modifier.height(200.dp)) {
+    Box(modifier = modifier.height(164.dp)) {
         Column(modifier = Modifier
             .fillMaxSize()
             .verticalScroll(scrollState)) {
