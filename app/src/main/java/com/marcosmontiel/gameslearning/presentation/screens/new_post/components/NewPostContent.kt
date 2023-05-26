@@ -12,12 +12,14 @@ import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavHostController
 import com.marcosmontiel.gameslearning.R
-import com.marcosmontiel.gameslearning.presentation.components.DefaultBackgroundHeader
-import com.marcosmontiel.gameslearning.presentation.components.DefaultIconRes
-import com.marcosmontiel.gameslearning.presentation.components.DefaultText
-import com.marcosmontiel.gameslearning.presentation.components.DefaultTextField
+import com.marcosmontiel.gameslearning.presentation.components.*
 import com.marcosmontiel.gameslearning.presentation.screens.new_post.NewPostViewModel
 import com.marcosmontiel.gameslearning.presentation.ui.theme.Gray800
+
+data class Category(
+    val name: String,
+    val icon: Int,
+)
 
 @Composable
 fun NewPostContent(
@@ -30,12 +32,7 @@ fun NewPostContent(
 
         DefaultBackgroundHeader(
             modifier = Modifier.align(Alignment.TopCenter),
-            content = {
-
-                NewPostHeaderContent()
-
-            }
-        )
+            content = {})
 
         NewPostCardContent(
             modifier = Modifier.align(Alignment.Center),
@@ -47,36 +44,19 @@ fun NewPostContent(
 }
 
 @Composable
-fun NewPostHeaderContent(modifier: Modifier = Modifier) {
-    Column(
-        modifier = modifier.fillMaxWidth(),
-        horizontalAlignment = Alignment.CenterHorizontally
-    ) {
-
-        DefaultIconRes(
-            modifier = Modifier
-                .align(Alignment.CenterHorizontally)
-                .padding(top = 32.dp),
-            size = 68.dp,
-            drawable = R.drawable.add_picture
-        )
-
-        Spacer(modifier = Modifier.size(16.dp))
-
-        DefaultText(
-            modifier = Modifier.align(Alignment.CenterHorizontally),
-            text = "SELECCIONA UNA IMAGEN"
-        )
-
-    }
-}
-
-@Composable
 fun NewPostCardContent(
     modifier: Modifier,
     viewModel: NewPostViewModel,
     background: Color
 ) {
+    val categories = listOf(
+        Category(name = "PC", icon = R.drawable.computer),
+        Category(name = "PS4", icon = R.drawable.playstation),
+        Category(name = "XBOX", icon = R.drawable.xbox),
+        Category(name = "NINTENDO", icon = R.drawable.nintendo),
+        Category(name = "MOBILE", icon = R.drawable.smartphone),
+    )
+
     Card(
         modifier = modifier
             .fillMaxWidth()
@@ -86,34 +66,29 @@ fun NewPostCardContent(
     ) {
         Column(
             modifier = modifier.padding(
-                horizontal = 24.dp,
-                vertical = 56.dp
+                horizontal = 24.dp, vertical = 56.dp
             )
         ) {
 
-            DefaultTextField(
-                modifier = Modifier.fillMaxWidth(),
+            DefaultTextField(modifier = Modifier.fillMaxWidth(),
                 isEnabled = true,
                 placeholder = "Nombre del juego",
                 value = "",
                 keyboardType = KeyboardType.Text,
                 onValueChangeAction = {
 
-                }
-            )
+                })
 
             Spacer(modifier = Modifier.size(16.dp))
 
-            DefaultTextField(
-                modifier = Modifier.fillMaxWidth(),
+            DefaultTextField(modifier = Modifier.fillMaxWidth(),
                 isEnabled = true,
                 placeholder = "Descripción",
                 value = "",
                 keyboardType = KeyboardType.Text,
                 onValueChangeAction = {
 
-                }
-            )
+                })
 
             Spacer(modifier = Modifier.size(16.dp))
 
@@ -122,6 +97,26 @@ fun NewPostCardContent(
                     .fillMaxWidth()
                     .wrapContentWidth(Alignment.CenterHorizontally),
                 text = "CATEGORÍAS"
+            )
+
+            Spacer(modifier = Modifier.size(16.dp))
+
+            categories.forEach { category ->
+
+                DefaultRadioButton(
+                    modifier = Modifier.fillMaxWidth(),
+                    item = category
+                )
+
+            }
+
+            Spacer(modifier = Modifier.size(8.dp))
+
+            DefaultButton(
+                modifier = Modifier.fillMaxWidth(),
+                isEnabled = false,
+                title = "Guardar",
+                onClickAction = {}
             )
 
         }
