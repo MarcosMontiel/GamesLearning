@@ -6,6 +6,8 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.Card
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -56,6 +58,9 @@ fun NewPostCardContent(
     viewModel: NewPostViewModel,
     background: Color
 ) {
+    val name by viewModel.name.observeAsState(initial = "")
+    val description by viewModel.description.observeAsState(initial = "")
+
     val categories = listOf(
         Category(name = "PC", icon = R.drawable.computer),
         Category(name = "PS4", icon = R.drawable.playstation),
@@ -80,10 +85,10 @@ fun NewPostCardContent(
             DefaultTextField(modifier = Modifier.fillMaxWidth(),
                 isEnabled = state.fieldsStatus,
                 placeholder = "Nombre del juego",
-                value = "",
+                value = name,
                 keyboardType = KeyboardType.Text,
                 onValueChangeAction = {
-
+                    viewModel.onValueChange(name = it, description = description)
                 }
             )
 
@@ -92,10 +97,10 @@ fun NewPostCardContent(
             DefaultTextField(modifier = Modifier.fillMaxWidth(),
                 isEnabled = state.fieldsStatus,
                 placeholder = "Descripción",
-                value = "",
+                value = description,
                 keyboardType = KeyboardType.Text,
                 onValueChangeAction = {
-
+                    viewModel.onValueChange(name = name, description = it)
                 }
             )
 
@@ -119,7 +124,7 @@ fun NewPostCardContent(
 
             DefaultButton(
                 modifier = Modifier.fillMaxWidth(),
-                isEnabled = false,
+                isEnabled = state.publishButtonStatus,
                 title = "Publicar",
                 onClickAction = {}
             )
