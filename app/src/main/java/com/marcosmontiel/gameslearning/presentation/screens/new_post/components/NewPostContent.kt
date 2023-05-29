@@ -17,14 +17,10 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavHostController
 import com.marcosmontiel.gameslearning.R
 import com.marcosmontiel.gameslearning.presentation.components.*
+import com.marcosmontiel.gameslearning.presentation.screens.new_post.Category
 import com.marcosmontiel.gameslearning.presentation.screens.new_post.NewPostState
 import com.marcosmontiel.gameslearning.presentation.screens.new_post.NewPostViewModel
 import com.marcosmontiel.gameslearning.presentation.ui.theme.Gray800
-
-data class Category(
-    val name: String,
-    val icon: Int,
-)
 
 @Composable
 fun NewPostContent(
@@ -60,6 +56,7 @@ fun NewPostCardContent(
 ) {
     val name by viewModel.name.observeAsState(initial = "")
     val description by viewModel.description.observeAsState(initial = "")
+    val category by viewModel.category.observeAsState(initial = "")
 
     val categories = listOf(
         Category(name = "PC", icon = R.drawable.computer),
@@ -88,7 +85,13 @@ fun NewPostCardContent(
                 value = name,
                 keyboardType = KeyboardType.Text,
                 onValueChangeAction = {
-                    viewModel.onValueChange(name = it, description = description)
+
+                    viewModel.onValueChange(
+                        name = it,
+                        description = description,
+                        category = category
+                    )
+
                 }
             )
 
@@ -100,7 +103,13 @@ fun NewPostCardContent(
                 value = description,
                 keyboardType = KeyboardType.Text,
                 onValueChangeAction = {
-                    viewModel.onValueChange(name = name, description = it)
+
+                    viewModel.onValueChange(
+                        name = name,
+                        description = it,
+                        category = category
+                    )
+
                 }
             )
 
@@ -117,7 +126,17 @@ fun NewPostCardContent(
 
             CategoryOptions(
                 modifier = Modifier.fillMaxWidth(),
-                categories = categories
+                categories = categories,
+                categoryName = category,
+                onValueChangeAction = {
+
+                    viewModel.onValueChange(
+                        name = name,
+                        description = description,
+                        category = it
+                    )
+
+                }
             )
 
             Spacer(modifier = Modifier.size(16.dp))
@@ -134,10 +153,15 @@ fun NewPostCardContent(
 }
 
 @Composable
-fun CategoryOptions(modifier: Modifier, categories: List<Category>) {
+fun CategoryOptions(
+    modifier: Modifier,
+    categories: List<Category>,
+    categoryName: String,
+    onValueChangeAction: (String) -> Unit
+) {
     val scrollState = rememberScrollState()
 
-    Box(modifier = modifier.height(164.dp)) {
+    Box(modifier = modifier.height(170.dp)) {
         Column(
             modifier = Modifier
                 .fillMaxSize()
@@ -148,7 +172,11 @@ fun CategoryOptions(modifier: Modifier, categories: List<Category>) {
 
                 DefaultRadioButton(
                     modifier = Modifier.fillMaxWidth(),
-                    item = category
+                    item = category,
+                    isSelected = category.name == categoryName,
+                    onValueChangeAction = {
+                        onValueChangeAction(it)
+                    }
                 )
 
             }

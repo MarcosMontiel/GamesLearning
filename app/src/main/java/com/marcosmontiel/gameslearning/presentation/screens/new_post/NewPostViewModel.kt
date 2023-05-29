@@ -25,20 +25,33 @@ class NewPostViewModel @Inject constructor() : ViewModel() {
     private val _description = MutableLiveData<String>()
     val description: LiveData<String> = _description
 
+    private val _category = MutableLiveData<String>()
+    val category: LiveData<String> = _category
+
     // Events
 
-    fun onValueChange(name: String, description: String) {
+    fun onValueChange(name: String, description: String, category: String) {
         _name.value = name
         _description.value = description
+        _category.value = category
 
         state = state.copy(
-            publishButtonStatus = validateFields(name = name, description = description)
+            publishButtonStatus = validateFields(
+                name = name,
+                description = description,
+                category = category
+            )
         )
     }
 
     // Private functions
 
-    private fun validateFields(name: String, description: String): Boolean =
-        name.isNotEmpty() && description.isNotEmpty()
+    private fun validateFields(name: String, description: String, category: String): Boolean =
+        name.isNotEmpty() && description.isNotEmpty() && category.isNotEmpty()
 
 }
+
+data class Category(
+    val name: String,
+    val icon: Int,
+)
