@@ -96,26 +96,30 @@ fun ProfileHeaderContent(
 
             if (image.isNotEmpty()) {
 
-                DefaultAvatarAsyncImage(
-                    modifier = Modifier.constrainAs(picture) {
-                        top.linkTo(parent.top)
-                        end.linkTo(parent.end)
-                        bottom.linkTo(parent.bottom)
-                        start.linkTo(parent.start)
-                    },
+                DefaultAsyncImage(
+                    modifier = Modifier
+                        .size(130.dp)
+                        .constrainAs(picture) {
+                            top.linkTo(parent.top)
+                            end.linkTo(parent.end)
+                            bottom.linkTo(parent.bottom)
+                            start.linkTo(parent.start)
+                        },
                     color = Gray900,
                     image = image
                 )
 
             } else {
 
-                DefaultAvatarImage(
-                    modifier = Modifier.constrainAs(picture) {
-                        top.linkTo(parent.top)
-                        end.linkTo(parent.end)
-                        bottom.linkTo(parent.bottom)
-                        start.linkTo(parent.start)
-                    },
+                DefaultImage(
+                    modifier = Modifier
+                        .size(130.dp)
+                        .constrainAs(picture) {
+                            top.linkTo(parent.top)
+                            end.linkTo(parent.end)
+                            bottom.linkTo(parent.bottom)
+                            start.linkTo(parent.start)
+                        },
                     color = Gray900
                 )
 

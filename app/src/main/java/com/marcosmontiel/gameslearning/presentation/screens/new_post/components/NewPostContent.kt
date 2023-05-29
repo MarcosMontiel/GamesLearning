@@ -79,6 +79,8 @@ fun NewPostCardContent(
             )
         ) {
 
+            PicturePostContent(modifier = Modifier.fillMaxWidth())
+
             DefaultTextField(modifier = Modifier.fillMaxWidth(),
                 isEnabled = state.fieldsStatus,
                 placeholder = "Nombre del juego",
@@ -149,6 +151,13 @@ fun NewPostCardContent(
             )
 
         }
+    }
+}
+
+@Composable
+fun PicturePostContent(modifier: Modifier) {
+    Box(modifier = modifier) {
+
     }
 }
 

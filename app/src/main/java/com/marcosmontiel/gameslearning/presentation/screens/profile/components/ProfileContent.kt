@@ -95,14 +95,18 @@ fun ProfileHeaderContent(
 
         if (profileData.avatar.isNotEmpty()) {
 
-            DefaultAvatarAsyncImage(
+            DefaultAsyncImage(
+                modifier = Modifier.size(130.dp),
                 fraction = 0.93f,
                 image = profileData.avatar
             )
 
         } else {
 
-            DefaultAvatarImage(fraction = 0.93f)
+            DefaultImage(
+                modifier = Modifier.size(130.dp),
+                fraction = 0.93f
+            )
 
         }
 
