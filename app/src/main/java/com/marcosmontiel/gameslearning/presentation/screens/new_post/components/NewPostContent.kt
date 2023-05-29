@@ -1,10 +1,13 @@
 package com.marcosmontiel.gameslearning.presentation.screens.new_post.components
 
+import androidx.compose.foundation.ScrollState
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.Card
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.rounded.CloudUpload
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.livedata.observeAsState
@@ -12,7 +15,9 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.input.KeyboardType
+import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
+import androidx.constraintlayout.compose.ConstraintLayout
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavHostController
 import com.marcosmontiel.gameslearning.R
@@ -20,6 +25,7 @@ import com.marcosmontiel.gameslearning.presentation.components.*
 import com.marcosmontiel.gameslearning.presentation.screens.new_post.Category
 import com.marcosmontiel.gameslearning.presentation.screens.new_post.NewPostState
 import com.marcosmontiel.gameslearning.presentation.screens.new_post.NewPostViewModel
+import com.marcosmontiel.gameslearning.presentation.ui.theme.Blue500
 import com.marcosmontiel.gameslearning.presentation.ui.theme.Gray800
 
 @Composable
@@ -35,9 +41,10 @@ fun NewPostContent(
 
         DefaultBackgroundHeader(
             modifier = Modifier.align(Alignment.TopCenter),
-            content = {})
+            content = {}
+        )
 
-        NewPostCardContent(
+        NewPostCard(
             modifier = Modifier.align(Alignment.Center),
             state = state,
             viewModel = viewModel,
@@ -48,38 +55,66 @@ fun NewPostContent(
 }
 
 @Composable
-fun NewPostCardContent(
+fun NewPostCard(
     modifier: Modifier,
     state: NewPostState,
     viewModel: NewPostViewModel,
     background: Color
 ) {
+    Card(
+        modifier = modifier
+            .fillMaxWidth()
+            .fillMaxHeight(fraction = 0.85f)
+            .padding(24.dp),
+        backgroundColor = background,
+        shape = RoundedCornerShape(14.dp)
+    ) {
+        Column(
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(32.dp)
+        ) {
+
+            NewPostCardContent(
+                modifier = Modifier.fillMaxWidth(),
+                state = state,
+                viewModel = viewModel
+            )
+
+            Spacer(modifier = Modifier.size(16.dp))
+
+            DefaultButton(
+                modifier = Modifier.fillMaxWidth(),
+                isEnabled = state.publishButtonStatus,
+                title = "Publicar",
+                onClickAction = {}
+            )
+
+        }
+    }
+}
+
+@Composable
+fun NewPostCardContent(modifier: Modifier, state: NewPostState, viewModel: NewPostViewModel) {
+    val scrollState: ScrollState = rememberScrollState()
+
     val name by viewModel.name.observeAsState(initial = "")
     val description by viewModel.description.observeAsState(initial = "")
     val category by viewModel.category.observeAsState(initial = "")
 
-    val categories = listOf(
-        Category(name = "PC", icon = R.drawable.computer),
-        Category(name = "PS4", icon = R.drawable.playstation),
-        Category(name = "XBOX", icon = R.drawable.xbox),
-        Category(name = "NINTENDO", icon = R.drawable.nintendo),
-        Category(name = "MOBILE", icon = R.drawable.smartphone),
-    )
+    Box(modifier = modifier.fillMaxHeight(fraction = 0.85f)) {
 
-    Card(
-        modifier = modifier
-            .fillMaxWidth()
-            .padding(24.dp),
-        backgroundColor = background,
-        shape = RoundedCornerShape(15.dp)
-    ) {
         Column(
-            modifier = modifier.padding(
-                horizontal = 24.dp, vertical = 56.dp
-            )
+            modifier = Modifier
+                .fillMaxWidth()
+                .verticalScroll(scrollState)
         ) {
 
-            PicturePostContent(modifier = Modifier.fillMaxWidth())
+            PicturePostContent(
+                modifier = Modifier.fillMaxWidth(),
+                state = state,
+                viewModel = viewModel
+            )
 
             DefaultTextField(modifier = Modifier.fillMaxWidth(),
                 isEnabled = state.fieldsStatus,
@@ -90,8 +125,7 @@ fun NewPostCardContent(
 
                     viewModel.onValueChange(
                         name = it,
-                        description = description,
-                        category = category
+                        description = description
                     )
 
                 }
@@ -108,8 +142,7 @@ fun NewPostCardContent(
 
                     viewModel.onValueChange(
                         name = name,
-                        description = it,
-                        category = category
+                        description = it
                     )
 
                 }
@@ -127,69 +160,117 @@ fun NewPostCardContent(
             Spacer(modifier = Modifier.size(16.dp))
 
             CategoryOptions(
-                modifier = Modifier.fillMaxWidth(),
-                categories = categories,
-                categoryName = category,
-                onValueChangeAction = {
-
-                    viewModel.onValueChange(
-                        name = name,
-                        description = description,
-                        category = it
-                    )
-
-                }
-            )
-
-            Spacer(modifier = Modifier.size(16.dp))
-
-            DefaultButton(
-                modifier = Modifier.fillMaxWidth(),
-                isEnabled = state.publishButtonStatus,
-                title = "Publicar",
-                onClickAction = {}
+                viewModel = viewModel,
+                categoryName = category
             )
 
         }
+
     }
 }
 
 @Composable
-fun PicturePostContent(modifier: Modifier) {
-    Box(modifier = modifier) {
+fun PicturePostContent(
+    modifier: Modifier,
+    state: NewPostState,
+    viewModel: NewPostViewModel,
+    height: Dp = 160.dp
+) {
+    val image by viewModel.image.observeAsState(initial = "")
 
+    Box(
+        modifier = modifier
+            .height(height)
+            .padding(
+                top = 0.dp,
+                end = 10.dp,
+                bottom = 20.dp,
+                start = 10.dp
+            ),
+        contentAlignment = Alignment.Center
+    ) {
+        ConstraintLayout(modifier = Modifier.fillMaxSize()) {
+            val (picture, icon) = createRefs()
+
+            if (image.isNotEmpty()) {
+
+                DefaultAsyncImage(
+                    modifier = Modifier
+                        .constrainAs(picture) {
+                            top.linkTo(parent.top)
+                            end.linkTo(parent.end)
+                            bottom.linkTo(parent.bottom)
+                            start.linkTo(parent.start)
+                        },
+                    shape = RoundedCornerShape(7.dp),
+                    fraction = 0.75f,
+                    image = image
+                )
+
+            } else {
+
+                DefaultImage(
+                    modifier = Modifier
+                        .constrainAs(picture) {
+                            top.linkTo(parent.top)
+                            end.linkTo(parent.end)
+                            bottom.linkTo(parent.bottom)
+                            start.linkTo(parent.start)
+                        },
+                    shape = RoundedCornerShape(7.dp),
+                    fraction = 0.75f,
+                    image = R.drawable.placeholder
+                )
+
+            }
+
+            DefaultAvatarIconButton(
+                modifier = Modifier.constrainAs(icon) {
+                    top.linkTo(picture.bottom, (-20).dp)
+                    start.linkTo(picture.end, (-20).dp)
+                },
+                buttonSize = 40.dp,
+                borderWidth = 1.dp,
+                borderColor = Blue500,
+                background = Blue500,
+                iconSize = 20.dp,
+                isEnabled = state.photoButtonStatus,
+                icon = Icons.Rounded.CloudUpload,
+                onClickAction = {
+
+                }
+            )
+
+        }
     }
 }
 
 @Composable
 fun CategoryOptions(
-    modifier: Modifier,
-    categories: List<Category>,
-    categoryName: String,
-    onValueChangeAction: (String) -> Unit
+    modifier: Modifier = Modifier,
+    viewModel: NewPostViewModel,
+    categoryName: String
 ) {
-    val scrollState = rememberScrollState()
+    val categories = listOf(
+        Category(name = "PC", icon = R.drawable.computer),
+        Category(name = "PS4", icon = R.drawable.playstation),
+        Category(name = "XBOX", icon = R.drawable.xbox),
+        Category(name = "NINTENDO", icon = R.drawable.nintendo),
+        Category(name = "MOBILE", icon = R.drawable.smartphone),
+    )
 
-    Box(modifier = modifier.height(170.dp)) {
-        Column(
-            modifier = Modifier
-                .fillMaxSize()
-                .verticalScroll(scrollState)
-        ) {
+    categories.forEach { category ->
 
-            categories.forEach { category ->
+        DefaultRadioButton(
+            modifier = modifier.fillMaxWidth(),
+            item = category,
+            isSelected = category.name == categoryName,
+            onValueChangeAction = {
 
-                DefaultRadioButton(
-                    modifier = Modifier.fillMaxWidth(),
-                    item = category,
-                    isSelected = category.name == categoryName,
-                    onValueChangeAction = {
-                        onValueChangeAction(it)
-                    }
-                )
+                viewModel.onCheckedChange(it)
 
             }
+        )
 
-        }
     }
 }
