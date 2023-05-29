@@ -1,16 +1,32 @@
 package com.marcosmontiel.gameslearning.presentation.screens.new_post
 
+import android.content.Context
+import android.net.Uri
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
+import com.marcosmontiel.gameslearning.presentation.utils.ComposeFileProvider
+import com.marcosmontiel.gameslearning.presentation.utils.ResultingActivityHandler
 import dagger.hilt.android.lifecycle.HiltViewModel
+import dagger.hilt.android.qualifiers.ApplicationContext
+import kotlinx.coroutines.ExperimentalCoroutinesApi
+import kotlinx.coroutines.launch
+import java.io.File
 import javax.inject.Inject
 
 @HiltViewModel
-class NewPostViewModel @Inject constructor() : ViewModel() {
+@ExperimentalCoroutinesApi
+class NewPostViewModel @Inject constructor(
+    @ApplicationContext private val context: Context
+) : ViewModel() {
+
+    // Instances
+
+    val activityHandler = ResultingActivityHandler()
 
     // State form
 
@@ -41,7 +57,7 @@ class NewPostViewModel @Inject constructor() : ViewModel() {
             publishButtonStatus = validateFields(
                 name = name,
                 description = description,
-                category = _category.value?: "",
+                category = _category.value ?: "",
             )
         )
     }
@@ -52,10 +68,18 @@ class NewPostViewModel @Inject constructor() : ViewModel() {
         state = state.copy(
             publishButtonStatus = validateFields(
                 name = _name.value ?: "",
-                description = _description.value?: "",
+                description = _description.value ?: "",
                 category = category
             )
         )
+    }
+
+    fun onGalleryChoose() = viewModelScope.launch {
+        val result: Uri = activityHandler.getContent() ?: return@launch
+        val image: File = ComposeFileProvider.createFileFromUri(
+            context = context,
+            uri = result
+        ) ?: return@launch
     }
 
     // Private functions

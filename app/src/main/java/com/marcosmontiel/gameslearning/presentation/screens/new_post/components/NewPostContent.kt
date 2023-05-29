@@ -27,14 +27,18 @@ import com.marcosmontiel.gameslearning.presentation.screens.new_post.NewPostStat
 import com.marcosmontiel.gameslearning.presentation.screens.new_post.NewPostViewModel
 import com.marcosmontiel.gameslearning.presentation.ui.theme.Blue500
 import com.marcosmontiel.gameslearning.presentation.ui.theme.Gray800
+import kotlinx.coroutines.ExperimentalCoroutinesApi
 
 @Composable
+@ExperimentalCoroutinesApi
 fun NewPostContent(
     modifier: Modifier,
     viewModel: NewPostViewModel = hiltViewModel(),
     navController: NavHostController,
     paddingValues: PaddingValues
 ) {
+    viewModel.activityHandler.Handle()
+
     val state: NewPostState = viewModel.state
 
     Box(modifier = modifier.padding(paddingValues = paddingValues)) {
@@ -55,6 +59,7 @@ fun NewPostContent(
 }
 
 @Composable
+@ExperimentalCoroutinesApi
 fun NewPostCard(
     modifier: Modifier,
     state: NewPostState,
@@ -95,6 +100,7 @@ fun NewPostCard(
 }
 
 @Composable
+@ExperimentalCoroutinesApi
 fun NewPostCardContent(modifier: Modifier, state: NewPostState, viewModel: NewPostViewModel) {
     val scrollState: ScrollState = rememberScrollState()
 
@@ -170,6 +176,7 @@ fun NewPostCardContent(modifier: Modifier, state: NewPostState, viewModel: NewPo
 }
 
 @Composable
+@ExperimentalCoroutinesApi
 fun PicturePostContent(
     modifier: Modifier,
     state: NewPostState,
@@ -237,7 +244,7 @@ fun PicturePostContent(
                 isEnabled = state.photoButtonStatus,
                 icon = Icons.Rounded.CloudUpload,
                 onClickAction = {
-
+                    viewModel.onGalleryChoose()
                 }
             )
 
@@ -246,6 +253,7 @@ fun PicturePostContent(
 }
 
 @Composable
+@ExperimentalCoroutinesApi
 fun CategoryOptions(
     modifier: Modifier = Modifier,
     viewModel: NewPostViewModel,

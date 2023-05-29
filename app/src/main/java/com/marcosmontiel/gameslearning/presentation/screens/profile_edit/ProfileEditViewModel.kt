@@ -102,7 +102,7 @@ class ProfileEditViewModel @Inject constructor(
 
     fun onGalleryChoose() = viewModelScope.launch {
         val result: Uri = activityHandler.getContent() ?: return@launch
-        val file = ComposeFileProvider.createFileFromUri(
+        val file: File = ComposeFileProvider.createFileFromUri(
             context = context,
             uri = result
         ) ?: return@launch
@@ -113,7 +113,10 @@ class ProfileEditViewModel @Inject constructor(
 
     fun onTakePicture() = viewModelScope.launch {
         val result: Bitmap = activityHandler.takePicturePreview() ?: return@launch
-        val image = ComposeFileProvider.getPathFromBitmap(context = context, bitmap = result)
+        val image: String = ComposeFileProvider.getPathFromBitmap(
+            context = context,
+            bitmap = result
+        )
 
         _image.value = image
 
