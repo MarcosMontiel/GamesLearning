@@ -6,7 +6,8 @@ import android.net.Uri
 import androidx.core.content.FileProvider
 import com.marcosmontiel.gameslearning.R
 import org.apache.commons.io.FileUtils
-import java.io.*
+import java.io.File
+import java.io.FileOutputStream
 import java.util.*
 
 class ComposeFileProvider : FileProvider(R.xml.file_paths) {
