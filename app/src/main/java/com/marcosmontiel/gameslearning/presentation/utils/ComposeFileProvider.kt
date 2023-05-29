@@ -29,7 +29,7 @@ class ComposeFileProvider : FileProvider(R.xml.file_paths) {
             }
         }
 
-        fun getPathFromBitmap(context: Context, bitmap: Bitmap): String {
+        fun createFileFromBitmap(context: Context, bitmap: Bitmap): File? {
             val randomFileName: String = UUID.randomUUID().toString()
             val file: File = File.createTempFile(randomFileName, ".jpg", context.cacheDir)
 
@@ -37,10 +37,10 @@ class ComposeFileProvider : FileProvider(R.xml.file_paths) {
                 FileOutputStream(file).use { outputStream ->
                     bitmap.compress(Bitmap.CompressFormat.JPEG, 100, outputStream)
                 }
-                file.path
+                file
             } catch (e: Exception) {
                 e.printStackTrace()
-                ""
+                null
             }
         }
 

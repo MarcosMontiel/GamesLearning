@@ -107,24 +107,19 @@ class ProfileEditViewModel @Inject constructor(
             uri = result
         ) ?: return@launch
 
-        _image.value = result.toString()
+        _image.value = file.path
         _profilePicture = file
     }
 
     fun onTakePicture() = viewModelScope.launch {
         val result: Bitmap = activityHandler.takePicturePreview() ?: return@launch
-        val image: String = ComposeFileProvider.getPathFromBitmap(
+        val file: File = ComposeFileProvider.createFileFromBitmap(
             context = context,
             bitmap = result
-        )
+        ) ?: return@launch
 
-        _image.value = image
-
-        if (image.isEmpty()) {
-            return@launch
-        }
-
-        _profilePicture = File(image)
+        _image.value = file.path
+        _profilePicture = file
     }
 
     fun onSavePhoto() = viewModelScope.launch {
