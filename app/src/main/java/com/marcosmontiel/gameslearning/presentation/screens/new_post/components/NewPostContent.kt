@@ -64,7 +64,7 @@ fun NewPostCard(
     Card(
         modifier = modifier
             .fillMaxWidth()
-            .fillMaxHeight(fraction = 0.85f)
+            .fillMaxHeight(fraction = 0.9f)
             .padding(24.dp),
         backgroundColor = background,
         shape = RoundedCornerShape(14.dp)
@@ -174,7 +174,7 @@ fun PicturePostContent(
     modifier: Modifier,
     state: NewPostState,
     viewModel: NewPostViewModel,
-    height: Dp = 160.dp
+    height: Dp = 180.dp
 ) {
     val image by viewModel.image.observeAsState(initial = "")
 

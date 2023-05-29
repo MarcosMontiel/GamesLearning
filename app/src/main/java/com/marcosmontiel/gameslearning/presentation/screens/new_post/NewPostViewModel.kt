@@ -41,7 +41,7 @@ class NewPostViewModel @Inject constructor() : ViewModel() {
             publishButtonStatus = validateFields(
                 name = name,
                 description = description,
-                category = _category.value!!
+                category = _category.value?: "",
             )
         )
     }
@@ -51,8 +51,8 @@ class NewPostViewModel @Inject constructor() : ViewModel() {
 
         state = state.copy(
             publishButtonStatus = validateFields(
-                name = _name.value!!,
-                description = _description.value!!,
+                name = _name.value ?: "",
+                description = _description.value?: "",
                 category = category
             )
         )
