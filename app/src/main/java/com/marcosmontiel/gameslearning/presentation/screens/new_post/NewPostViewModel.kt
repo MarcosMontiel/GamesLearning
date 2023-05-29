@@ -24,6 +24,10 @@ class NewPostViewModel @Inject constructor(
     @ApplicationContext private val context: Context
 ) : ViewModel() {
 
+    // Late init variables
+
+    private lateinit var _postPicture: File
+
     // Instances
 
     val activityHandler = ResultingActivityHandler()
@@ -76,10 +80,13 @@ class NewPostViewModel @Inject constructor(
 
     fun onGalleryChoose() = viewModelScope.launch {
         val result: Uri = activityHandler.getContent() ?: return@launch
-        val image: File = ComposeFileProvider.createFileFromUri(
+        val file: File = ComposeFileProvider.createFileFromUri(
             context = context,
             uri = result
         ) ?: return@launch
+
+        _image.value = file.path
+        _postPicture = file
     }
 
     // Private functions
