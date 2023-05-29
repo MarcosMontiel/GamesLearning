@@ -120,7 +120,7 @@ class ProfileEditViewModel @Inject constructor(
 
         _image.value = image
 
-        if (image == "") {
+        if (image.isEmpty()) {
             return@launch
         }
 
