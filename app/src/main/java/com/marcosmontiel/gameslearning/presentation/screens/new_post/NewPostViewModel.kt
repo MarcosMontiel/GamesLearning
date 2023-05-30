@@ -1,6 +1,6 @@
 package com.marcosmontiel.gameslearning.presentation.screens.new_post
 
-import android.content.Context
+import android.app.Application
 import android.net.Uri
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -12,7 +12,6 @@ import androidx.lifecycle.viewModelScope
 import com.marcosmontiel.gameslearning.presentation.utils.ComposeFileProvider
 import com.marcosmontiel.gameslearning.presentation.utils.ResultingActivityHandler
 import dagger.hilt.android.lifecycle.HiltViewModel
-import dagger.hilt.android.qualifiers.ApplicationContext
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.launch
 import java.io.File
@@ -21,7 +20,7 @@ import javax.inject.Inject
 @HiltViewModel
 @ExperimentalCoroutinesApi
 class NewPostViewModel @Inject constructor(
-    @ApplicationContext private val context: Context
+    private val application: Application
 ) : ViewModel() {
 
     // Late init variables
@@ -81,7 +80,7 @@ class NewPostViewModel @Inject constructor(
     fun onGalleryChoose() = viewModelScope.launch {
         val result: Uri = activityHandler.getContent() ?: return@launch
         val file: File = ComposeFileProvider.createFileFromUri(
-            context = context,
+            context = application.applicationContext,
             uri = result
         ) ?: return@launch
 

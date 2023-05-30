@@ -1,6 +1,6 @@
 package com.marcosmontiel.gameslearning.presentation.screens.profile_edit
 
-import android.content.Context
+import android.app.Application
 import android.graphics.Bitmap
 import android.net.Uri
 import androidx.compose.runtime.getValue
@@ -13,7 +13,6 @@ import com.marcosmontiel.gameslearning.domain.usecase.profile.ProfileUseCases
 import com.marcosmontiel.gameslearning.presentation.utils.ComposeFileProvider
 import com.marcosmontiel.gameslearning.presentation.utils.ResultingActivityHandler
 import dagger.hilt.android.lifecycle.HiltViewModel
-import dagger.hilt.android.qualifiers.ApplicationContext
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -26,7 +25,7 @@ import javax.inject.Inject
 class ProfileEditViewModel @Inject constructor(
     savedStateHandle: SavedStateHandle,
     private val useCases: ProfileUseCases,
-    @ApplicationContext private val context: Context
+    private val application: Application
 ) : ViewModel() {
 
     // Late init variables
@@ -103,7 +102,7 @@ class ProfileEditViewModel @Inject constructor(
     fun onGalleryChoose() = viewModelScope.launch {
         val result: Uri = activityHandler.getContent() ?: return@launch
         val file: File = ComposeFileProvider.createFileFromUri(
-            context = context,
+            context = application.applicationContext,
             uri = result
         ) ?: return@launch
 
@@ -114,7 +113,7 @@ class ProfileEditViewModel @Inject constructor(
     fun onTakePicture() = viewModelScope.launch {
         val result: Bitmap = activityHandler.takePicturePreview() ?: return@launch
         val file: File = ComposeFileProvider.createFileFromBitmap(
-            context = context,
+            context = application.applicationContext,
             bitmap = result
         ) ?: return@launch
 
