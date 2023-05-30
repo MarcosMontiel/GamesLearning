@@ -19,7 +19,6 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
 import java.io.File
-import java.lang.ref.WeakReference
 import javax.inject.Inject
 
 @HiltViewModel
@@ -27,7 +26,7 @@ import javax.inject.Inject
 class ProfileEditViewModel @Inject constructor(
     savedStateHandle: SavedStateHandle,
     private val useCases: ProfileUseCases,
-    @ApplicationContext private val contextRef: WeakReference<Context>
+    @ApplicationContext private val context: Context
 ) : ViewModel() {
 
     // Late init variables
@@ -38,7 +37,6 @@ class ProfileEditViewModel @Inject constructor(
     // Instances
 
     val activityHandler = ResultingActivityHandler()
-    private val context: Context? get() = contextRef.get()
 
     // Get params
 
@@ -103,13 +101,9 @@ class ProfileEditViewModel @Inject constructor(
     }
 
     fun onGalleryChoose() = viewModelScope.launch {
-        if (context == null) {
-            return@launch
-        }
-
         val result: Uri = activityHandler.getContent() ?: return@launch
         val file: File = ComposeFileProvider.createFileFromUri(
-            context = context!!,
+            context = context,
             uri = result
         ) ?: return@launch
 
@@ -118,13 +112,9 @@ class ProfileEditViewModel @Inject constructor(
     }
 
     fun onTakePicture() = viewModelScope.launch {
-        if (context == null) {
-            return@launch
-        }
-
         val result: Bitmap = activityHandler.takePicturePreview() ?: return@launch
         val file: File = ComposeFileProvider.createFileFromBitmap(
-            context = context!!,
+            context = context,
             bitmap = result
         ) ?: return@launch
 
