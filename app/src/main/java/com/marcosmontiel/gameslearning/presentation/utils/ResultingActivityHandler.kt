@@ -50,21 +50,23 @@ class ResultingActivityHandler @Inject constructor() {
         delayMillis: Long = 200,
         launcher: (ActivityResultLauncher<I>) -> Unit
     ): O? = suspendCancellableCoroutine { coroutine ->
+
         _callback = {
-            val a = rememberLauncherForActivityResult(contract) {
+
+            val result = rememberLauncherForActivityResult(contract = contract, onResult = {
                 coroutine.resume(value = it, onCancellation = {})
                 _callback = null
                 return@rememberLauncherForActivityResult
-            }
+            })
 
-            LaunchedEffect(a) {
+            LaunchedEffect(result) {
                 var tried = 0
                 var tryOn = true
                 while (tryOn) {
                     ++tried
                     delay(delayMillis)
                     try {
-                        launcher(a)
+                        launcher(result)
                         tryOn = false
                     } catch (e: Exception) {
                         if (tried > maxAttempts) {
@@ -75,7 +77,9 @@ class ResultingActivityHandler @Inject constructor() {
                     }
                 }
             }
+
         }
+
     }
 
     @Composable
