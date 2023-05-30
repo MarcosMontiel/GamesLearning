@@ -16,12 +16,13 @@ import dagger.hilt.android.qualifiers.ApplicationContext
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.launch
 import java.io.File
+import java.lang.ref.WeakReference
 import javax.inject.Inject
 
 @HiltViewModel
 @ExperimentalCoroutinesApi
 class NewPostViewModel @Inject constructor(
-    @ApplicationContext private val context: Context
+    @ApplicationContext private val contextRef: WeakReference<Context>
 ) : ViewModel() {
 
     // Late init variables
@@ -31,6 +32,7 @@ class NewPostViewModel @Inject constructor(
     // Instances
 
     val activityHandler = ResultingActivityHandler()
+    private val context: Context? get() = contextRef.get()
 
     // State form
 
@@ -79,9 +81,13 @@ class NewPostViewModel @Inject constructor(
     }
 
     fun onGalleryChoose() = viewModelScope.launch {
+        if (context == null) {
+            return@launch
+        }
+
         val result: Uri = activityHandler.getContent() ?: return@launch
         val file: File = ComposeFileProvider.createFileFromUri(
-            context = context,
+            context = context!!,
             uri = result
         ) ?: return@launch
 

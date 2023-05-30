@@ -101,7 +101,11 @@ fun NewPostCard(
 
 @Composable
 @ExperimentalCoroutinesApi
-fun NewPostCardContent(modifier: Modifier, state: NewPostState, viewModel: NewPostViewModel) {
+fun NewPostCardContent(
+    modifier: Modifier,
+    state: NewPostState,
+    viewModel: NewPostViewModel
+) {
     val scrollState: ScrollState = rememberScrollState()
 
     val name by viewModel.name.observeAsState(initial = "")
