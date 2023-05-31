@@ -170,6 +170,7 @@ fun NewPostCardContent(
             Spacer(modifier = Modifier.size(16.dp))
 
             CategoryOptions(
+                state = state,
                 viewModel = viewModel,
                 categoryName = category
             )
@@ -260,6 +261,7 @@ fun PicturePostContent(
 @ExperimentalCoroutinesApi
 fun CategoryOptions(
     modifier: Modifier = Modifier,
+    state: NewPostState,
     viewModel: NewPostViewModel,
     categoryName: String
 ) {
@@ -277,6 +279,7 @@ fun CategoryOptions(
             modifier = modifier.fillMaxWidth(),
             item = category,
             isSelected = category.name == categoryName,
+            isEnabled = state.fieldsStatus,
             onValueChangeAction = {
 
                 viewModel.onCheckedChange(it)

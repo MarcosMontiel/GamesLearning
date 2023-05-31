@@ -9,6 +9,7 @@ import androidx.compose.ui.Modifier
 import androidx.navigation.NavHostController
 import com.marcosmontiel.gameslearning.presentation.components.DefaultTopBar
 import com.marcosmontiel.gameslearning.presentation.screens.new_post.components.NewPostContent
+import com.marcosmontiel.gameslearning.presentation.screens.new_post.components.NewPostView
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 
 @Composable
@@ -35,5 +36,10 @@ fun NewPostScreen(navController: NavHostController) {
 
         },
         bottomBar = {}
+    )
+
+    NewPostView(
+        modifier = Modifier.fillMaxSize(),
+        navController = navController
     )
 }

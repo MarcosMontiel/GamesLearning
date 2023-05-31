@@ -22,11 +22,13 @@ fun DefaultRadioButton(
     modifier: Modifier = Modifier,
     item: Category,
     isSelected: Boolean,
+    isEnabled: Boolean = true,
     onValueChangeAction: (String) -> Unit
 ) {
     Row(
         modifier = modifier.selectable(
             selected = isSelected,
+            enabled = isEnabled,
             onClick = {
                 onValueChangeAction(item.name)
             }),
@@ -38,6 +40,7 @@ fun DefaultRadioButton(
             onClick = {
                 onValueChangeAction(item.name)
             },
+            enabled = isEnabled,
             colors = RadioButtonDefaults.colors(
                 selectedColor = Gray200,
                 unselectedColor = Gray400,
