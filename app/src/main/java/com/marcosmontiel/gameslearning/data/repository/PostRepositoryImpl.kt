@@ -28,6 +28,7 @@ class PostRepositoryImpl @Inject constructor(
 
             if (downloadUrl != null) {
 
+                post.image = downloadUrl.toString()
                 postsRef.add(post).await()
 
                 Response.Success(data = true)

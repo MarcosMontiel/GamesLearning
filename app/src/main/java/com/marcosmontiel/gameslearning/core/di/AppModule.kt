@@ -16,6 +16,8 @@ import com.marcosmontiel.gameslearning.domain.repository.AuthRepository
 import com.marcosmontiel.gameslearning.domain.repository.PostRepository
 import com.marcosmontiel.gameslearning.domain.repository.ProfileRepository
 import com.marcosmontiel.gameslearning.domain.usecase.auth.*
+import com.marcosmontiel.gameslearning.domain.usecase.post.CreatePost
+import com.marcosmontiel.gameslearning.domain.usecase.post.PostUseCases
 import com.marcosmontiel.gameslearning.domain.usecase.profile.*
 import dagger.Module
 import dagger.Provides
@@ -94,6 +96,13 @@ object AppModule {
             login = Login(repository = repository),
             logout = Logout(repository = repository),
             register = Register(repository = repository)
+        )
+
+    @Singleton
+    @Provides
+    fun providePostUseCases(repository: PostRepository): PostUseCases =
+        PostUseCases(
+            create = CreatePost(repository)
         )
 
     @Singleton
