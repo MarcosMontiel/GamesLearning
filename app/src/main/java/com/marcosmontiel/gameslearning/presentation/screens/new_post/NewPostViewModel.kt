@@ -10,7 +10,6 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.google.firebase.auth.FirebaseUser
 import com.marcosmontiel.gameslearning.domain.model.Post
 import com.marcosmontiel.gameslearning.domain.model.Response
 import com.marcosmontiel.gameslearning.domain.usecase.auth.AuthUseCases
@@ -41,7 +40,7 @@ class NewPostViewModel @Inject constructor(
     // Instances
 
     val activityHandler = ResultingActivityHandler()
-    private val _currentUser: FirebaseUser = authUseCases.getCurrentUser()!!
+    private val _currentUserId: String = authUseCases.getCurrentUser()?.uid ?: ""
 
     // State form
 
@@ -109,7 +108,7 @@ class NewPostViewModel @Inject constructor(
         _postData = Post(
             category = _category.value!!,
             description = _description.value!!,
-            idUser = _currentUser.uid,
+            idUser = _currentUserId,
             name = _name.value!!
         )
 

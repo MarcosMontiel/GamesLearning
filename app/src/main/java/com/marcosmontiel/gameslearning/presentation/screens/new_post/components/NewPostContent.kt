@@ -193,12 +193,7 @@ fun PicturePostContent(
     Box(
         modifier = modifier
             .height(height)
-            .padding(
-                top = 0.dp,
-                end = 10.dp,
-                bottom = 20.dp,
-                start = 10.dp
-            ),
+            .padding(bottom = 20.dp),
         contentAlignment = Alignment.Center
     ) {
         ConstraintLayout(modifier = Modifier.fillMaxSize()) {
