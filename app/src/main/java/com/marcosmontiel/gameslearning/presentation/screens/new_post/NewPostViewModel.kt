@@ -2,6 +2,7 @@ package com.marcosmontiel.gameslearning.presentation.screens.new_post
 
 import android.app.Application
 import android.net.Uri
+import android.widget.Toast
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
@@ -138,11 +139,23 @@ class NewPostViewModel @Inject constructor(
     }
 
     private fun createPost() = viewModelScope.launch {
-        disableFields()
+        if (_image.value.isNullOrEmpty()) {
 
-        _postResponse.value = Response.Loading
-        val result = postUseCases.create(post = _postData, file = _postFile)
-        _postResponse.value = result
+            Toast.makeText(
+                application.applicationContext,
+                "You must choose an image to continue.",
+                Toast.LENGTH_LONG
+            ).show()
+
+        } else {
+
+            disableFields()
+
+            _postResponse.value = Response.Loading
+            val result = postUseCases.create(post = _postData, file = _postFile)
+            _postResponse.value = result
+
+        }
     }
 
     private fun validateFields(name: String, description: String, category: String): Boolean =
