@@ -7,10 +7,13 @@ import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 import com.google.firebase.storage.FirebaseStorage
 import com.google.firebase.storage.StorageReference
+import com.marcosmontiel.gameslearning.core.Constants.POSTS
 import com.marcosmontiel.gameslearning.core.Constants.PROFILES
 import com.marcosmontiel.gameslearning.data.repository.AuthRepositoryImpl
+import com.marcosmontiel.gameslearning.data.repository.PostRepositoryImpl
 import com.marcosmontiel.gameslearning.data.repository.ProfileRepositoryImpl
 import com.marcosmontiel.gameslearning.domain.repository.AuthRepository
+import com.marcosmontiel.gameslearning.domain.repository.PostRepository
 import com.marcosmontiel.gameslearning.domain.repository.ProfileRepository
 import com.marcosmontiel.gameslearning.domain.usecase.auth.*
 import com.marcosmontiel.gameslearning.domain.usecase.profile.*
@@ -18,6 +21,7 @@ import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
+import javax.inject.Named
 import javax.inject.Singleton
 
 @Module
@@ -38,6 +42,13 @@ object AppModule {
 
     @Singleton
     @Provides
+    @Named(POSTS)
+    fun providePostsRef(database: FirebaseFirestore): CollectionReference =
+        database.collection(POSTS)
+
+    @Singleton
+    @Provides
+    @Named(PROFILES)
     fun provideProfilesRef(database: FirebaseFirestore): CollectionReference =
         database.collection(PROFILES)
 
@@ -49,6 +60,13 @@ object AppModule {
 
     @Singleton
     @Provides
+    @Named(POSTS)
+    fun provideStoragePostsRef(storage: FirebaseStorage): StorageReference =
+        storage.reference.child(POSTS)
+
+    @Singleton
+    @Provides
+    @Named(PROFILES)
     fun provideStorageProfilesRef(storage: FirebaseStorage): StorageReference =
         storage.reference.child(PROFILES)
 
@@ -57,6 +75,10 @@ object AppModule {
     @Singleton
     @Provides
     fun provideAuthRepository(impl: AuthRepositoryImpl): AuthRepository = impl
+
+    @Singleton
+    @Provides
+    fun providePostRepository(impl: PostRepositoryImpl): PostRepository = impl
 
     @Singleton
     @Provides

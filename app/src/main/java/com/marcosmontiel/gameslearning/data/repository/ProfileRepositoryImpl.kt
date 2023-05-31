@@ -3,6 +3,7 @@ package com.marcosmontiel.gameslearning.data.repository
 import android.net.Uri
 import com.google.firebase.firestore.CollectionReference
 import com.google.firebase.storage.StorageReference
+import com.marcosmontiel.gameslearning.core.Constants.PROFILES
 import com.marcosmontiel.gameslearning.domain.model.Response
 import com.marcosmontiel.gameslearning.domain.model.User
 import com.marcosmontiel.gameslearning.domain.repository.ProfileRepository
@@ -12,10 +13,11 @@ import kotlinx.coroutines.flow.callbackFlow
 import kotlinx.coroutines.tasks.await
 import java.io.File
 import javax.inject.Inject
+import javax.inject.Named
 
 class ProfileRepositoryImpl @Inject constructor(
-    private val profilesRef: CollectionReference,
-    private val storageProfilesRef: StorageReference
+    @Named(PROFILES) private val profilesRef: CollectionReference,
+    @Named(PROFILES) private val storageProfilesRef: StorageReference
 ) : ProfileRepository {
 
     override fun currentProfile(userId: String): Flow<User> = callbackFlow {
