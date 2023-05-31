@@ -76,11 +76,15 @@ class ProfileRepositoryImpl @Inject constructor(
             val downloadUrl = ref.downloadUrl.await()
 
             if (downloadUrl != null) {
+
                 Response.Success(data = downloadUrl.toString())
+
             } else {
+
                 Response.Failure(
                     exception = Exception("Error: File download URL is null.")
                 )
+
             }
 
         } catch (e: Exception) {
