@@ -19,7 +19,6 @@ import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.constraintlayout.compose.ConstraintLayout
 import androidx.hilt.navigation.compose.hiltViewModel
-import androidx.navigation.NavHostController
 import com.marcosmontiel.gameslearning.R
 import com.marcosmontiel.gameslearning.presentation.components.*
 import com.marcosmontiel.gameslearning.presentation.screens.new_post.Category
@@ -34,7 +33,6 @@ import kotlinx.coroutines.ExperimentalCoroutinesApi
 fun NewPostContent(
     modifier: Modifier,
     viewModel: NewPostViewModel = hiltViewModel(),
-    navController: NavHostController,
     paddingValues: PaddingValues
 ) {
     viewModel.activityHandler.Handle()
@@ -92,7 +90,9 @@ fun NewPostCard(
                 modifier = Modifier.fillMaxWidth(),
                 isEnabled = state.publishButtonStatus,
                 title = "Publicar",
-                onClickAction = {}
+                onClickAction = {
+                    viewModel.onCreatePost()
+                }
             )
 
         }

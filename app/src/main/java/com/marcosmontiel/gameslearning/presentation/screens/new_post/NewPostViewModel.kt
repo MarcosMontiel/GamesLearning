@@ -9,10 +9,17 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.google.firebase.auth.FirebaseUser
+import com.marcosmontiel.gameslearning.domain.model.Post
+import com.marcosmontiel.gameslearning.domain.model.Response
+import com.marcosmontiel.gameslearning.domain.usecase.auth.AuthUseCases
+import com.marcosmontiel.gameslearning.domain.usecase.post.PostUseCases
 import com.marcosmontiel.gameslearning.presentation.utils.ComposeFileProvider
 import com.marcosmontiel.gameslearning.presentation.utils.ResultingActivityHandler
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.ExperimentalCoroutinesApi
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
 import java.io.File
 import javax.inject.Inject
@@ -20,16 +27,20 @@ import javax.inject.Inject
 @HiltViewModel
 @ExperimentalCoroutinesApi
 class NewPostViewModel @Inject constructor(
+    authUseCases: AuthUseCases,
+    private val postUseCases: PostUseCases,
     private val application: Application
 ) : ViewModel() {
 
     // Late init variables
 
-    private lateinit var _postPicture: File
+    private lateinit var _postData: Post
+    private lateinit var _postFile: File
 
     // Instances
 
     val activityHandler = ResultingActivityHandler()
+    private val _currentUser: FirebaseUser = authUseCases.getCurrentUser()!!
 
     // State form
 
@@ -49,6 +60,11 @@ class NewPostViewModel @Inject constructor(
 
     private val _image = MutableLiveData<String>()
     val image: LiveData<String> = _image
+
+    // Response
+
+    private val _postResponse = MutableStateFlow<Response<Boolean>?>(value = null)
+    val postResponse: StateFlow<Response<Boolean>?> = _postResponse
 
     // Events
 
@@ -85,10 +101,49 @@ class NewPostViewModel @Inject constructor(
         ) ?: return@launch
 
         _image.value = file.path
-        _postPicture = file
+        _postFile = file
+    }
+
+    fun onCreatePost() {
+        _postData = Post(
+            category = _category.value!!,
+            description = _description.value!!,
+            idUser = _currentUser.uid,
+            name = _name.value!!
+        )
+
+        createPost()
+    }
+
+    // Functions
+
+    fun enableFields() {
+        state = state.copy(
+            fieldsStatus = true,
+            photoButtonStatus = true,
+            publishButtonStatus = true,
+        )
+
+        _postResponse.value = null
     }
 
     // Private functions
+
+    private fun disableFields() {
+        state = state.copy(
+            fieldsStatus = false,
+            photoButtonStatus = false,
+            publishButtonStatus = false,
+        )
+    }
+
+    private fun createPost() = viewModelScope.launch {
+        disableFields()
+
+        _postResponse.value = Response.Loading
+        val result = postUseCases.create(post = _postData, file = _postFile)
+        _postResponse.value = result
+    }
 
     private fun validateFields(name: String, description: String, category: String): Boolean =
         name.isNotEmpty() && description.isNotEmpty() && category.isNotEmpty()

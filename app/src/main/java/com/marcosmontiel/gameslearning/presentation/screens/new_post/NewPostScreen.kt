@@ -9,8 +9,10 @@ import androidx.compose.ui.Modifier
 import androidx.navigation.NavHostController
 import com.marcosmontiel.gameslearning.presentation.components.DefaultTopBar
 import com.marcosmontiel.gameslearning.presentation.screens.new_post.components.NewPostContent
+import kotlinx.coroutines.ExperimentalCoroutinesApi
 
 @Composable
+@ExperimentalCoroutinesApi
 fun NewPostScreen(navController: NavHostController) {
     val scaffoldState: ScaffoldState = rememberScaffoldState()
 
@@ -28,7 +30,6 @@ fun NewPostScreen(navController: NavHostController) {
 
             NewPostContent(
                 modifier = Modifier.fillMaxSize(),
-                navController = navController,
                 paddingValues = paddingValues
             )
 
