@@ -3,11 +3,11 @@ package com.marcosmontiel.gameslearning.domain.model
 import com.google.gson.Gson
 
 data class User(
-    var id: String = "",
-    var username: String = "",
+    var avatar: String = "",
     var email: String = "",
+    var id: String = "",
     var password: String = "",
-    var avatar: String = ""
+    var username: String = "",
 ) {
 
     fun toJson(): String = Gson().toJson(this)
