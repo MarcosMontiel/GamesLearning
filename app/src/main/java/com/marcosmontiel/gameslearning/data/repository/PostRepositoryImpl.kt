@@ -7,6 +7,9 @@ import com.marcosmontiel.gameslearning.core.Constants.POSTS
 import com.marcosmontiel.gameslearning.domain.model.Post
 import com.marcosmontiel.gameslearning.domain.model.Response
 import com.marcosmontiel.gameslearning.domain.repository.PostRepository
+import kotlinx.coroutines.channels.awaitClose
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.callbackFlow
 import kotlinx.coroutines.tasks.await
 import java.io.File
 import javax.inject.Inject
@@ -16,6 +19,26 @@ class PostRepositoryImpl @Inject constructor(
     @Named(POSTS) private val postsRef: CollectionReference,
     @Named(POSTS) private val storagePostsRef: StorageReference
 ) : PostRepository {
+
+    override fun getPosts(): Flow<Response<List<Post>>> = callbackFlow {
+        val snapshotListener = postsRef.addSnapshotListener { snapshot, e ->
+            val response = if (snapshot != null) {
+
+                val posts = snapshot.toObjects(Post::class.java)
+                Response.Success(data = posts)
+
+            } else {
+
+                Response.Failure(exception = e)
+
+            }
+            trySend(element = response)
+        }
+
+        awaitClose {
+            snapshotListener.remove()
+        }
+    }
 
     override suspend fun create(post: Post, file: File): Response<Boolean> {
         return try {
