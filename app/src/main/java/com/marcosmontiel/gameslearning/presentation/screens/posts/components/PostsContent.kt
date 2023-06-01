@@ -2,12 +2,13 @@ package com.marcosmontiel.gameslearning.presentation.screens.posts.components
 
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Card
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavHostController
@@ -32,10 +33,17 @@ fun PostsContent(
                 modifier = Modifier.fillMaxWidth(),
                 content = {
 
-                    items(items = posts) { post ->
+                    itemsIndexed(items = posts) { index, post ->
+
+                        val paddingTop: Dp = if (index == 0) 20.dp else 10.dp
 
                         PostCard(
-                            modifier = Modifier.fillMaxWidth(),
+                            modifier = Modifier.padding(
+                                top = paddingTop,
+                                end = 20.dp,
+                                bottom = 10.dp,
+                                start = 20.dp
+                            ),
                             background = Gray800,
                             post = post
                         )
@@ -52,12 +60,12 @@ fun PostsContent(
 @Composable
 fun PostCard(modifier: Modifier, background: Color, post: Post) {
     Card(
-        modifier = modifier.padding(20.dp),
+        modifier = modifier.fillMaxWidth(),
         shape = RoundedCornerShape(16.dp),
         backgroundColor = background,
         elevation = 4.dp
     ) {
-        Column(
+        Row(
             modifier = Modifier
                 .fillMaxWidth()
                 .padding(20.dp)
