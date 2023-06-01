@@ -13,8 +13,10 @@ import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavHostController
+import com.marcosmontiel.gameslearning.R
 import com.marcosmontiel.gameslearning.domain.model.Post
 import com.marcosmontiel.gameslearning.presentation.components.DefaultAsyncImage
+import com.marcosmontiel.gameslearning.presentation.components.DefaultEmptyScreen
 import com.marcosmontiel.gameslearning.presentation.components.DefaultText
 import com.marcosmontiel.gameslearning.presentation.screens.posts.PostsViewModel
 import com.marcosmontiel.gameslearning.presentation.ui.theme.Gray500
@@ -33,6 +35,13 @@ fun PostsContent(
         content = {
 
             if (posts.isEmpty()) {
+
+                DefaultEmptyScreen(
+                    modifier = Modifier.fillMaxSize(),
+                    image = R.drawable.joystick,
+                    title = "No hay publicaciones para mostrar",
+                    subtitle = "Sé el primero en publicar"
+                )
 
             } else {
 
