@@ -138,15 +138,7 @@ class NewPostViewModel @Inject constructor(
     }
 
     private fun createPost() = viewModelScope.launch {
-        if (_image.value.isNullOrEmpty()) {
-
-            Toast.makeText(
-                application.applicationContext,
-                "You must choose an image to continue.",
-                Toast.LENGTH_LONG
-            ).show()
-
-        } else {
+        if (validateRequiredFields()) {
 
             disableFields()
 
@@ -159,6 +151,22 @@ class NewPostViewModel @Inject constructor(
 
     private fun validateFields(name: String, description: String, category: String): Boolean =
         name.isNotEmpty() && description.isNotEmpty() && category.isNotEmpty()
+
+    private fun validateRequiredFields(): Boolean {
+        if (_image.value.isNullOrEmpty()) {
+
+            Toast.makeText(
+                application.applicationContext,
+                "You must choose an image to continue.",
+                Toast.LENGTH_LONG
+            ).show()
+
+            return false
+
+        }
+
+        return true
+    }
 
 }
 
