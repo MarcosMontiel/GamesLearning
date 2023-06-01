@@ -35,13 +35,14 @@ fun PostsContent(
 
                     itemsIndexed(items = posts) { index, post ->
 
-                        val paddingTop: Dp = if (index == 0) 20.dp else 10.dp
+                        val paddingTop: Dp = if (index == 0) 30.dp else 10.dp
+                        val paddingBottom: Dp = if (index == posts.size - 1) 160.dp else 10.dp
 
                         PostCard(
                             modifier = Modifier.padding(
                                 top = paddingTop,
                                 end = 20.dp,
-                                bottom = 10.dp,
+                                bottom = paddingBottom,
                                 start = 20.dp
                             ),
                             background = Gray800,
