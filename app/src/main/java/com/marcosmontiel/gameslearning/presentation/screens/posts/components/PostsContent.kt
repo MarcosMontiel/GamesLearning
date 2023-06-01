@@ -29,31 +29,42 @@ fun PostsContent(
         modifier = modifier.padding(paddingValues = paddingValues),
         content = {
 
-            LazyColumn(
-                modifier = Modifier.fillMaxWidth(),
-                content = {
+            if (posts.isEmpty()) {
 
-                    itemsIndexed(items = posts) { index, post ->
+            } else {
 
-                        val size: Int = posts.size - 1
-                        val paddingTop: Dp = if (index == 0) 30.dp else 10.dp
-                        val paddingBottom: Dp = if (index == size) 84.dp else 10.dp
+                PostsRecyclerView(modifier = Modifier.fillMaxWidth(), posts = posts)
 
-                        PostCard(
-                            modifier = Modifier.padding(
-                                top = paddingTop,
-                                end = 20.dp,
-                                bottom = paddingBottom,
-                                start = 20.dp
-                            ),
-                            background = Gray800,
-                            post = post
-                        )
+            }
 
-                    }
+        }
+    )
+}
 
-                }
-            )
+@Composable
+fun PostsRecyclerView(modifier: Modifier, posts: List<Post>) {
+    LazyColumn(
+        modifier = modifier,
+        content = {
+
+            itemsIndexed(items = posts) { index, post ->
+
+                val size: Int = posts.size - 1
+                val paddingTop: Dp = if (index == 0) 30.dp else 10.dp
+                val paddingBottom: Dp = if (index == size) 84.dp else 10.dp
+
+                PostCard(
+                    modifier = Modifier.padding(
+                        top = paddingTop,
+                        end = 20.dp,
+                        bottom = paddingBottom,
+                        start = 20.dp
+                    ),
+                    background = Gray800,
+                    post = post
+                )
+
+            }
 
         }
     )
