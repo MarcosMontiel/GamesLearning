@@ -40,7 +40,7 @@ fun PostsContent(
                     modifier = Modifier.fillMaxSize(),
                     image = R.drawable.joystick,
                     title = "No hay publicaciones para mostrar",
-                    subtitle = "Sé el primero en publicar"
+                    subtitle = "Sé el primero en hacerlo"
                 )
 
             } else {
@@ -99,7 +99,7 @@ fun PostCard(modifier: Modifier, background: Color, post: Post) {
             DefaultAsyncImage(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .height(140.dp),
+                    .height(180.dp),
                 shape = RoundedCornerShape(8.dp),
                 image = post.image
             )
@@ -124,7 +124,7 @@ fun PostCard(modifier: Modifier, background: Color, post: Post) {
 
             DefaultText(
                 modifier = Modifier.fillMaxWidth(),
-                text = post.idUser,
+                text = post.user?.username ?: "not found",
                 color = Gray500,
                 style = MaterialTheme.typography.body2
             )

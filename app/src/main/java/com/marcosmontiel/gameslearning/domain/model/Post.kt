@@ -9,6 +9,7 @@ data class Post(
     var idUser: String = "",
     var image: String = "",
     var name: String = "",
+    var user: User? = null,
 ) {
 
     fun toJson(): String = Gson().toJson(this)
