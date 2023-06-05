@@ -108,7 +108,7 @@ class NewPostViewModel @Inject constructor(
         _postData = Post(
             category = _category.value!!,
             description = _description.value!!,
-            idUser = _currentUserId,
+            userId = _currentUserId,
             name = _name.value!!
         )
 

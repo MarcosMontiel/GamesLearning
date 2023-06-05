@@ -99,7 +99,7 @@ fun PostCard(modifier: Modifier, background: Color, post: Post) {
             DefaultAsyncImage(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .height(180.dp),
+                    .height(200.dp),
                 shape = RoundedCornerShape(8.dp),
                 image = post.image
             )

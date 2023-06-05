@@ -6,10 +6,10 @@ data class Post(
     var category: String = "",
     var description: String = "",
     var id: String = "",
-    var idUser: String = "",
     var image: String = "",
     var name: String = "",
     var user: User? = null,
+    var userId: String = "",
 ) {
 
     fun toJson(): String = Gson().toJson(this)

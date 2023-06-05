@@ -33,10 +33,24 @@ class PostRepositoryImpl @Inject constructor(
 
                     val posts = snapshot.toObjects(Post::class.java)
 
-                    posts.map { post ->
+                    val usersId: ArrayList<String> = ArrayList()
+
+                    posts.forEach { post ->
+                        usersId.add(post.userId)
+                    }
+
+                    val users: List<String> = usersId.toSet().toList()
+
+                    users.map { id ->
                         async {
-                            val document = profilesRef.document(post.idUser).get().await()
-                            post.user = document.toObject(User::class.java)
+                            val document = profilesRef.document(id).get().await()
+                            val user = document.toObject(User::class.java)
+
+                            posts.forEach { post ->
+                                if (post.userId == id) {
+                                    post.user = user
+                                }
+                            }
                         }
                     }.forEach {
                         it.await()
