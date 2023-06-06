@@ -18,6 +18,7 @@ import java.io.File
 import javax.inject.Inject
 import javax.inject.Named
 
+@DelicateCoroutinesApi
 class PostRepositoryImpl @Inject constructor(
     @Named(POSTS) private val postsRef: CollectionReference,
     @Named(PROFILES) private val profilesRef: CollectionReference,
