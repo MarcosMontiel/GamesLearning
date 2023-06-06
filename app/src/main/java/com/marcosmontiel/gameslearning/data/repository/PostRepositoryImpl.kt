@@ -33,27 +33,17 @@ class PostRepositoryImpl @Inject constructor(
 
                     val posts = snapshot.toObjects(Post::class.java)
 
-                    val usersId: ArrayList<String> = ArrayList()
+                    val usersId: List<String> = posts.map { it.userId }.distinct()
+
+                    val users: List<User?> = usersId.map { id ->
+                        async {
+                            profilesRef.document(id).get().await().toObject(User::class.java)
+                        }
+                    }.awaitAll()
 
                     posts.forEach { post ->
-                        usersId.add(post.userId)
-                    }
-
-                    val users: List<String> = usersId.toSet().toList()
-
-                    users.map { id ->
-                        async {
-                            val document = profilesRef.document(id).get().await()
-                            val user = document.toObject(User::class.java)
-
-                            posts.forEach { post ->
-                                if (post.userId == id) {
-                                    post.user = user
-                                }
-                            }
-                        }
-                    }.forEach {
-                        it.await()
+                        val user: User? = users.find { it?.id == post.userId }
+                        post.user = user
                     }
 
                     Response.Success(data = posts)
@@ -63,6 +53,7 @@ class PostRepositoryImpl @Inject constructor(
                     Response.Failure(exception = e)
 
                 }
+
                 trySend(element = response)
 
             }
