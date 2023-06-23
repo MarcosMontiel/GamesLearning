@@ -2,8 +2,8 @@ package com.marcosmontiel.gameslearning.presentation.navigation
 
 import androidx.navigation.*
 import androidx.navigation.compose.composable
-import com.marcosmontiel.gameslearning.presentation.navigation.DetailsRoutes.NewPost
-import com.marcosmontiel.gameslearning.presentation.navigation.DetailsRoutes.ProfileEdit
+import com.marcosmontiel.gameslearning.presentation.navigation.DetailsRoutes.*
+import com.marcosmontiel.gameslearning.presentation.screens.detail_post.DetailPostScreen
 import com.marcosmontiel.gameslearning.presentation.screens.new_post.NewPostScreen
 import com.marcosmontiel.gameslearning.presentation.screens.profile_edit.ProfileEditScreen
 import kotlinx.coroutines.ExperimentalCoroutinesApi
@@ -14,6 +14,10 @@ fun NavGraphBuilder.detailsNavGraph(navController: NavHostController) {
 
         composable(route = NewPost.route) {
             NewPostScreen(navController = navController)
+        }
+
+        composable(route = DetailPost.route) {
+            DetailPostScreen(navController = navController)
         }
 
         composable(
@@ -30,7 +34,9 @@ fun NavGraphBuilder.detailsNavGraph(navController: NavHostController) {
 
 sealed class DetailsRoutes(val route: String) {
 
-    object NewPost : DetailsRoutes(route = "posts/new")
+    object NewPost : DetailsRoutes(route = "post/new")
+
+    object DetailPost : DetailsRoutes(route = "post/detail")
 
     object ProfileEdit : DetailsRoutes(route = "profile/edit/{profile}") {
         fun createArgs(profile: String): String = "profile/edit/$profile"

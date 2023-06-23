@@ -30,7 +30,7 @@ fun DefaultAsyncImage(
     ) {
         AsyncImage(
             model = image,
-            contentDescription = "profile image",
+            contentDescription = "async image",
             modifier = Modifier
                 .clip(shape)
                 .fillMaxSize(fraction = fraction),
