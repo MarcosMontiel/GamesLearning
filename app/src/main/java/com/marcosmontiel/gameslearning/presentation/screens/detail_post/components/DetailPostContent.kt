@@ -59,7 +59,9 @@ fun DetailPostData(modifier: Modifier) {
 @Composable
 fun DetailUserCard(modifier: Modifier, background: Color) {
     Card(
-        modifier = modifier.padding(16.dp),
+        modifier = modifier
+            .padding(16.dp)
+            .height(102.dp),
         shape = RoundedCornerShape(16.dp),
         backgroundColor = background,
         elevation = 4.dp
@@ -79,7 +81,7 @@ fun DetailUserCard(modifier: Modifier, background: Color) {
             Spacer(modifier = Modifier.size(16.dp))
 
             Column(
-                modifier = Modifier.fillMaxWidth(),
+                modifier = Modifier.fillMaxSize(),
                 verticalArrangement = Arrangement.Center
             ) {
 
