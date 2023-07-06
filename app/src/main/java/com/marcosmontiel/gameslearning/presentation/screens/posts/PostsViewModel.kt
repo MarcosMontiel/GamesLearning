@@ -10,6 +10,8 @@ import com.marcosmontiel.gameslearning.domain.model.Response
 import com.marcosmontiel.gameslearning.domain.usecase.post.PostUseCases
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
+import java.net.URLEncoder
+import java.nio.charset.StandardCharsets
 import javax.inject.Inject
 
 @HiltViewModel
@@ -23,6 +25,20 @@ class PostsViewModel @Inject constructor(
 
     init {
         getAllPosts()
+    }
+
+    // Functions
+
+    fun convertPostToJson(post: Post): String {
+        post.let { data ->
+            if (data.image.isNotEmpty()) {
+                val encoded = URLEncoder.encode(data.image, StandardCharsets.UTF_8.toString())
+                data.copy(image = encoded)
+            } else {
+                data
+            }
+        }
+        return post.toJson()
     }
 
     // Private functions

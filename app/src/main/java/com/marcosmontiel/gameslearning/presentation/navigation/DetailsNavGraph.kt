@@ -16,7 +16,12 @@ fun NavGraphBuilder.detailsNavGraph(navController: NavHostController) {
             NewPostScreen(navController = navController)
         }
 
-        composable(route = DetailPost.route) {
+        composable(
+            route = DetailPost.route,
+            arguments = listOf(
+                navArgument(name = "post") { type = NavType.StringType }
+            )
+        ) {
             DetailPostScreen(navController = navController)
         }
 
@@ -36,7 +41,9 @@ sealed class DetailsRoutes(val route: String) {
 
     object NewPost : DetailsRoutes(route = "post/new")
 
-    object DetailPost : DetailsRoutes(route = "post/detail")
+    object DetailPost : DetailsRoutes(route = "post/detail/{post}") {
+        fun createArgs(post: String): String = "post/detail/$post"
+    }
 
     object ProfileEdit : DetailsRoutes(route = "profile/edit/{profile}") {
         fun createArgs(profile: String): String = "profile/edit/$profile"
