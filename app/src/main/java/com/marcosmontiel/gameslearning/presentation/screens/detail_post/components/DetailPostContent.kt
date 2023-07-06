@@ -1,18 +1,26 @@
 package com.marcosmontiel.gameslearning.presentation.screens.detail_post.components
 
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Card
+import androidx.compose.material.Divider
+import androidx.compose.material.MaterialTheme
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavHostController
+import com.marcosmontiel.gameslearning.R
 import com.marcosmontiel.gameslearning.presentation.components.DefaultAsyncImage
+import com.marcosmontiel.gameslearning.presentation.components.DefaultIconRes
 import com.marcosmontiel.gameslearning.presentation.components.DefaultText
 import com.marcosmontiel.gameslearning.presentation.screens.detail_post.DetailPostViewModel
+import com.marcosmontiel.gameslearning.presentation.ui.theme.Blue300
 import com.marcosmontiel.gameslearning.presentation.ui.theme.Gray500
 import com.marcosmontiel.gameslearning.presentation.ui.theme.Gray800
 
@@ -30,14 +38,16 @@ fun DetailPostContent(
             DefaultAsyncImage(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .height(280.dp),
+                    .height(220.dp),
                 shape = RoundedCornerShape(0.dp),
                 image = "https://i.blogs.es/4c03cc/halo-4/1366_2000.jpeg"
             )
 
             Spacer(modifier = Modifier.size(24.dp))
 
-            DetailPostData(modifier = Modifier.fillMaxWidth())
+            DetailsPostData(modifier = Modifier.fillMaxWidth())
+
+            DetailsGameData(modifier = Modifier.fillMaxWidth())
 
         }
 
@@ -45,7 +55,7 @@ fun DetailPostContent(
 }
 
 @Composable
-fun DetailPostData(modifier: Modifier) {
+fun DetailsPostData(modifier: Modifier) {
     Column(modifier = modifier) {
 
         DetailUserCard(
@@ -99,6 +109,54 @@ fun DetailUserCard(modifier: Modifier, background: Color) {
             }
 
         }
+
+    }
+}
+
+@Composable
+fun DetailsGameData(modifier: Modifier) {
+    Column(modifier = modifier.padding(16.dp)) {
+
+        DefaultText(
+            text = "Nombre del juego",
+            color = Blue300,
+            style = MaterialTheme.typography.h6
+        )
+
+        Spacer(modifier = Modifier.size(16.dp))
+
+        Box(
+            modifier = Modifier
+                .clip(RoundedCornerShape(32.dp))
+                .background(color = Blue300)
+                .padding(horizontal = 32.dp, vertical = 8.dp),
+            content = {
+
+                Row(
+                    horizontalArrangement = Arrangement.Center,
+                    verticalAlignment = Alignment.CenterVertically,
+                    content = {
+
+                        DefaultIconRes(
+                            size = 20.dp,
+                            drawable = R.drawable.playstation,
+                        )
+
+                        Spacer(modifier = Modifier.size(8.dp))
+
+                        DefaultText(text = "PS4")
+
+                    }
+                )
+
+            }
+        )
+
+        Divider(
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(top = 32.dp)
+        )
 
     }
 }
