@@ -19,8 +19,10 @@ import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavHostController
 import com.marcosmontiel.gameslearning.R
+import com.marcosmontiel.gameslearning.domain.model.Post
 import com.marcosmontiel.gameslearning.presentation.components.DefaultAsyncImage
 import com.marcosmontiel.gameslearning.presentation.components.DefaultIconRes
+import com.marcosmontiel.gameslearning.presentation.components.DefaultImage
 import com.marcosmontiel.gameslearning.presentation.components.DefaultText
 import com.marcosmontiel.gameslearning.presentation.screens.detail_post.DetailPostViewModel
 import com.marcosmontiel.gameslearning.presentation.ui.theme.Blue300
@@ -36,6 +38,7 @@ fun DetailPostContent(
     paddingValues: PaddingValues
 ) {
     val scrollState: ScrollState = rememberScrollState()
+    val post: Post = viewModel.post
 
     Box(modifier = modifier.padding(paddingValues = paddingValues)) {
 
@@ -50,14 +53,20 @@ fun DetailPostContent(
                     .fillMaxWidth()
                     .height(220.dp),
                 shape = RoundedCornerShape(0.dp),
-                image = "https://i.blogs.es/4c03cc/halo-4/1366_2000.jpeg"
+                image = post.image
             )
 
             Spacer(modifier = Modifier.size(24.dp))
 
-            DetailsPostData(modifier = Modifier.fillMaxWidth())
+            DetailsPostData(
+                modifier = Modifier.fillMaxWidth(),
+                post = post
+            )
 
-            DetailsGameData(modifier = Modifier.fillMaxWidth())
+            DetailsGameData(
+                modifier = Modifier.fillMaxWidth(),
+                post = post
+            )
 
             Divider(
                 modifier = Modifier
@@ -70,7 +79,10 @@ fun DetailPostContent(
                     )
             )
 
-            DetailsDescGameData(modifier = Modifier.fillMaxWidth())
+            DetailsDescGameData(
+                modifier = Modifier.fillMaxWidth(),
+                post = post
+            )
 
         }
 
@@ -78,11 +90,12 @@ fun DetailPostContent(
 }
 
 @Composable
-fun DetailsPostData(modifier: Modifier) {
+fun DetailsPostData(modifier: Modifier, post: Post) {
     Column(modifier = modifier) {
 
         DetailUserCard(
             modifier = Modifier.fillMaxWidth(),
+            post = post,
             background = Gray800
         )
 
@@ -90,7 +103,7 @@ fun DetailsPostData(modifier: Modifier) {
 }
 
 @Composable
-fun DetailUserCard(modifier: Modifier, background: Color) {
+fun DetailUserCard(modifier: Modifier, post: Post, background: Color) {
     Card(
         modifier = modifier
             .padding(16.dp)
@@ -106,10 +119,20 @@ fun DetailUserCard(modifier: Modifier, background: Color) {
                 .padding(16.dp)
         ) {
 
-            DefaultAsyncImage(
-                modifier = Modifier.size(70.dp),
-                image = "https://i.blogs.es/4c03cc/halo-4/1366_2000.jpeg"
-            )
+            val avatar: String = post.user?.avatar ?: ""
+
+            if (avatar.isNotEmpty()) {
+
+                DefaultAsyncImage(
+                    modifier = Modifier.size(70.dp),
+                    image = post.user!!.avatar
+                )
+
+            } else {
+
+                DefaultImage(modifier = Modifier.size(70.dp))
+
+            }
 
             Spacer(modifier = Modifier.size(16.dp))
 
@@ -124,7 +147,7 @@ fun DetailUserCard(modifier: Modifier, background: Color) {
                 )
 
                 DefaultText(
-                    text = "Marcos Montiel",
+                    text = post.user?.username ?: "Unknown",
                     color = Gray500,
                     fontWeight = FontWeight.Normal,
                 )
@@ -137,11 +160,11 @@ fun DetailUserCard(modifier: Modifier, background: Color) {
 }
 
 @Composable
-fun DetailsGameData(modifier: Modifier) {
+fun DetailsGameData(modifier: Modifier, post: Post) {
     Column(modifier = modifier.padding(16.dp)) {
 
         DefaultText(
-            text = "Nombre del juego",
+            text = post.name,
             color = Blue300,
             style = MaterialTheme.typography.h6
         )
@@ -167,7 +190,7 @@ fun DetailsGameData(modifier: Modifier) {
 
                         Spacer(modifier = Modifier.size(8.dp))
 
-                        DefaultText(text = "PS4")
+                        DefaultText(text = post.category)
 
                     }
                 )
@@ -179,7 +202,7 @@ fun DetailsGameData(modifier: Modifier) {
 }
 
 @Composable
-fun DetailsDescGameData(modifier: Modifier) {
+fun DetailsDescGameData(modifier: Modifier, post: Post) {
     Column(modifier = modifier.padding(16.dp)) {
 
         DefaultText(
@@ -191,7 +214,7 @@ fun DetailsDescGameData(modifier: Modifier) {
         Spacer(modifier = Modifier.size(16.dp))
 
         DefaultText(
-            text = "test",
+            text = post.description,
             color = Gray500,
             fontWeight = FontWeight.Normal,
             style = MaterialTheme.typography.body2
