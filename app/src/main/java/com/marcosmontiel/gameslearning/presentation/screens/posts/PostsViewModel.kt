@@ -7,6 +7,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.marcosmontiel.gameslearning.domain.model.Post
 import com.marcosmontiel.gameslearning.domain.model.Response
+import com.marcosmontiel.gameslearning.domain.model.User
 import com.marcosmontiel.gameslearning.domain.usecase.post.PostUseCases
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
@@ -30,12 +31,21 @@ class PostsViewModel @Inject constructor(
     // Functions
 
     fun convertPostToJson(post: Post): String {
+        val userArgument = post.user?.let { data ->
+            if (data.avatar.isNotEmpty()) {
+                val encoded = URLEncoder.encode(data.avatar, StandardCharsets.UTF_8.toString())
+                data.copy(avatar = encoded)
+            } else {
+                data
+            }
+        } ?: User()
+
         val postArgument = post.let { data ->
             if (data.image.isNotEmpty()) {
                 val encoded = URLEncoder.encode(data.image, StandardCharsets.UTF_8.toString())
-                data.copy(image = encoded)
+                data.copy(image = encoded, user = userArgument)
             } else {
-                data
+                data.copy(user = userArgument)
             }
         }
         return postArgument.toJson()
