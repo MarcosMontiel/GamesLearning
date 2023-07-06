@@ -21,6 +21,7 @@ import com.marcosmontiel.gameslearning.presentation.components.DefaultIconRes
 import com.marcosmontiel.gameslearning.presentation.components.DefaultText
 import com.marcosmontiel.gameslearning.presentation.screens.detail_post.DetailPostViewModel
 import com.marcosmontiel.gameslearning.presentation.ui.theme.Blue300
+import com.marcosmontiel.gameslearning.presentation.ui.theme.Gray400
 import com.marcosmontiel.gameslearning.presentation.ui.theme.Gray500
 import com.marcosmontiel.gameslearning.presentation.ui.theme.Gray800
 
@@ -48,6 +49,19 @@ fun DetailPostContent(
             DetailsPostData(modifier = Modifier.fillMaxWidth())
 
             DetailsGameData(modifier = Modifier.fillMaxWidth())
+
+            Divider(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(
+                        top = 24.dp,
+                        end = 16.dp,
+                        bottom = 16.dp,
+                        start = 16.dp
+                    )
+            )
+
+            DetailsDescGameData(modifier = Modifier.fillMaxWidth())
 
         }
 
@@ -152,10 +166,26 @@ fun DetailsGameData(modifier: Modifier) {
             }
         )
 
-        Divider(
-            modifier = Modifier
-                .fillMaxWidth()
-                .padding(top = 32.dp)
+    }
+}
+
+@Composable
+fun DetailsDescGameData(modifier: Modifier) {
+    Column(modifier = modifier.padding(16.dp)) {
+
+        DefaultText(
+            text = "Descripción",
+            color = Gray400,
+            style = MaterialTheme.typography.h6
+        )
+
+        Spacer(modifier = Modifier.size(16.dp))
+
+        DefaultText(
+            text = "test",
+            color = Gray500,
+            fontWeight = FontWeight.Normal,
+            style = MaterialTheme.typography.body2
         )
 
     }
