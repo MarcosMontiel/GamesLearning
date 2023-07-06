@@ -197,5 +197,7 @@ fun DetailsDescGameData(modifier: Modifier) {
             style = MaterialTheme.typography.body2
         )
 
+        Spacer(modifier = Modifier.size(32.dp))
+
     }
 }
