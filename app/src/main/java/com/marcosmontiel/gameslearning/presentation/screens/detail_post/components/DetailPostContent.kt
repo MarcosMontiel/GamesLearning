@@ -1,8 +1,11 @@
 package com.marcosmontiel.gameslearning.presentation.screens.detail_post.components
 
+import androidx.compose.foundation.ScrollState
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.Card
 import androidx.compose.material.Divider
 import androidx.compose.material.MaterialTheme
@@ -32,9 +35,15 @@ fun DetailPostContent(
     navController: NavHostController,
     paddingValues: PaddingValues
 ) {
+    val scrollState: ScrollState = rememberScrollState()
+
     Box(modifier = modifier.padding(paddingValues = paddingValues)) {
 
-        Column(modifier = Modifier.fillMaxWidth()) {
+        Column(
+            modifier = Modifier
+                .fillMaxWidth()
+                .verticalScroll(state = scrollState)
+        ) {
 
             DefaultAsyncImage(
                 modifier = Modifier
