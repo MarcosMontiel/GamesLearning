@@ -104,13 +104,12 @@ fun PostCard(
     background: Color,
     post: Post
 ) {
-    val postArgs = viewModel.convertPostToJson(post = post)
-
     Card(
         modifier = modifier
             .fillMaxWidth()
             .clickable {
-                navController.navigate(DetailPost.createArgs(post = postArgs))
+                val postArgument: String = viewModel.convertPostToJson(post = post)
+                navController.navigate(DetailPost.createArgs(post = postArgument))
             },
         shape = RoundedCornerShape(16.dp),
         backgroundColor = background,
