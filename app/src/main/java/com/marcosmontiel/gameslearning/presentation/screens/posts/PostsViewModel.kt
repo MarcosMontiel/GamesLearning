@@ -7,7 +7,6 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.marcosmontiel.gameslearning.domain.model.Post
 import com.marcosmontiel.gameslearning.domain.model.Response
-import com.marcosmontiel.gameslearning.domain.model.User
 import com.marcosmontiel.gameslearning.domain.usecase.post.PostUseCases
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
@@ -38,7 +37,7 @@ class PostsViewModel @Inject constructor(
             } else {
                 data
             }
-        } ?: User()
+        }
 
         val postArgument = post.let { data ->
             if (data.image.isNotEmpty()) {
