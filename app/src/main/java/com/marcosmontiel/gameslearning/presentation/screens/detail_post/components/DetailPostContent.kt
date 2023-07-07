@@ -1,5 +1,6 @@
 package com.marcosmontiel.gameslearning.presentation.screens.detail_post.components
 
+import androidx.annotation.DrawableRes
 import androidx.compose.foundation.ScrollState
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
@@ -10,6 +11,8 @@ import androidx.compose.material.Card
 import androidx.compose.material.Divider
 import androidx.compose.material.MaterialTheme
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -39,6 +42,7 @@ fun DetailPostContent(
 ) {
     val scrollState: ScrollState = rememberScrollState()
     val post: Post = viewModel.post
+    val categoryRes by viewModel.categoryRes.observeAsState(initial = R.drawable.playstation)
 
     Box(modifier = modifier.padding(paddingValues = paddingValues)) {
 
@@ -65,6 +69,7 @@ fun DetailPostContent(
 
             DetailsGameData(
                 modifier = Modifier.fillMaxWidth(),
+                categoryRes = categoryRes,
                 post = post
             )
 
@@ -103,7 +108,11 @@ fun DetailsPostData(modifier: Modifier, post: Post) {
 }
 
 @Composable
-fun DetailUserCard(modifier: Modifier, post: Post, background: Color) {
+fun DetailUserCard(
+    modifier: Modifier,
+    post: Post,
+    background: Color
+) {
     Card(
         modifier = modifier
             .padding(16.dp)
@@ -161,7 +170,11 @@ fun DetailUserCard(modifier: Modifier, post: Post, background: Color) {
 }
 
 @Composable
-fun DetailsGameData(modifier: Modifier, post: Post) {
+fun DetailsGameData(
+    modifier: Modifier,
+    @DrawableRes categoryRes: Int,
+    post: Post
+) {
     Column(modifier = modifier.padding(16.dp)) {
 
         DefaultText(
@@ -186,7 +199,7 @@ fun DetailsGameData(modifier: Modifier, post: Post) {
 
                         DefaultIconRes(
                             size = 20.dp,
-                            drawable = R.drawable.playstation,
+                            drawable = categoryRes,
                         )
 
                         Spacer(modifier = Modifier.size(8.dp))

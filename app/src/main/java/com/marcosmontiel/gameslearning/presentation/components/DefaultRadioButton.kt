@@ -12,7 +12,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
-import com.marcosmontiel.gameslearning.presentation.screens.new_post.Category
+import com.marcosmontiel.gameslearning.domain.model.Category
 import com.marcosmontiel.gameslearning.presentation.ui.theme.Gray200
 import com.marcosmontiel.gameslearning.presentation.ui.theme.Gray400
 import com.marcosmontiel.gameslearning.presentation.ui.theme.Gray500

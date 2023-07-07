@@ -20,8 +20,8 @@ import androidx.compose.ui.unit.dp
 import androidx.constraintlayout.compose.ConstraintLayout
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.marcosmontiel.gameslearning.R
+import com.marcosmontiel.gameslearning.domain.model.Category
 import com.marcosmontiel.gameslearning.presentation.components.*
-import com.marcosmontiel.gameslearning.presentation.screens.new_post.Category
 import com.marcosmontiel.gameslearning.presentation.screens.new_post.NewPostState
 import com.marcosmontiel.gameslearning.presentation.screens.new_post.NewPostViewModel
 import com.marcosmontiel.gameslearning.presentation.ui.theme.Blue500
@@ -260,13 +260,7 @@ fun CategoryOptions(
     viewModel: NewPostViewModel,
     categoryName: String
 ) {
-    val categories = listOf(
-        Category(name = "PC", icon = R.drawable.computer),
-        Category(name = "PS4", icon = R.drawable.playstation),
-        Category(name = "XBOX", icon = R.drawable.xbox),
-        Category(name = "NINTENDO", icon = R.drawable.nintendo),
-        Category(name = "MOBILE", icon = R.drawable.smartphone),
-    )
+    val categories = Category.getCategories()
 
     categories.forEach { category ->
 

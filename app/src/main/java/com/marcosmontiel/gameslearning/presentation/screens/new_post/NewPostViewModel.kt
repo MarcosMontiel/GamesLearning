@@ -169,8 +169,3 @@ class NewPostViewModel @Inject constructor(
     }
 
 }
-
-data class Category(
-    val name: String,
-    val icon: Int,
-)
