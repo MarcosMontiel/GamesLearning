@@ -151,7 +151,7 @@ fun ProfileCardContent(
             title = "Editar Datos",
             onClickAction = {
                 navController.navigate(
-                    route = ProfileEdit.createArgs(profile = viewModel.convertLiveDataToJson())
+                    route = ProfileEdit.createArgs(profile = profileData.toJson())
                 )
             }
         )

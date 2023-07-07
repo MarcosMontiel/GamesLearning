@@ -12,7 +12,6 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
-import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavHostController
 import com.marcosmontiel.gameslearning.R
 import com.marcosmontiel.gameslearning.domain.model.Post
@@ -20,14 +19,12 @@ import com.marcosmontiel.gameslearning.presentation.components.DefaultAsyncImage
 import com.marcosmontiel.gameslearning.presentation.components.DefaultEmptyScreen
 import com.marcosmontiel.gameslearning.presentation.components.DefaultText
 import com.marcosmontiel.gameslearning.presentation.navigation.DetailsRoutes.DetailPost
-import com.marcosmontiel.gameslearning.presentation.screens.posts.PostsViewModel
 import com.marcosmontiel.gameslearning.presentation.ui.theme.Gray500
 import com.marcosmontiel.gameslearning.presentation.ui.theme.Gray800
 
 @Composable
 fun PostsContent(
     modifier: Modifier,
-    viewModel: PostsViewModel = hiltViewModel(),
     navController: NavHostController,
     paddingValues: PaddingValues,
     posts: List<Post>
@@ -49,7 +46,6 @@ fun PostsContent(
 
                 PostsRecyclerView(
                     modifier = Modifier.fillMaxWidth(),
-                    viewModel = viewModel,
                     navController = navController,
                     posts = posts
                 )
@@ -63,7 +59,6 @@ fun PostsContent(
 @Composable
 fun PostsRecyclerView(
     modifier: Modifier,
-    viewModel: PostsViewModel,
     navController: NavHostController,
     posts: List<Post>
 ) {
@@ -84,7 +79,6 @@ fun PostsRecyclerView(
                         bottom = paddingBottom,
                         start = 20.dp
                     ),
-                    viewModel = viewModel,
                     navController = navController,
                     background = Gray800,
                     post = post
@@ -99,7 +93,6 @@ fun PostsRecyclerView(
 @Composable
 fun PostCard(
     modifier: Modifier,
-    viewModel: PostsViewModel,
     navController: NavHostController,
     background: Color,
     post: Post
@@ -108,8 +101,7 @@ fun PostCard(
         modifier = modifier
             .fillMaxWidth()
             .clickable {
-                val postArgument: String = viewModel.convertPostToJson(post = post)
-                navController.navigate(DetailPost.createArgs(post = postArgument))
+                navController.navigate(DetailPost.createArgs(post = post.toJson()))
             },
         shape = RoundedCornerShape(16.dp),
         backgroundColor = background,

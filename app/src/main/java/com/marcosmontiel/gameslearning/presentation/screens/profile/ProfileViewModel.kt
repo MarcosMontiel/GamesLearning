@@ -10,8 +10,6 @@ import com.marcosmontiel.gameslearning.domain.usecase.auth.AuthUseCases
 import com.marcosmontiel.gameslearning.domain.usecase.profile.ProfileUseCases
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
-import java.net.URLEncoder
-import java.nio.charset.StandardCharsets
 import javax.inject.Inject
 
 @HiltViewModel
@@ -37,20 +35,6 @@ class ProfileViewModel @Inject constructor(
 
     fun onLogout() {
         authUseCases.logout()
-    }
-
-    // Functions
-
-    fun convertLiveDataToJson(): String {
-        val profile: User = _profileData.value?.let { data ->
-            if (data.avatar.isNotEmpty()) {
-                val encoded = URLEncoder.encode(data.avatar, StandardCharsets.UTF_8.toString())
-                data.copy(avatar = encoded)
-            } else {
-                data
-            }
-        } ?: User()
-        return profile.toJson()
     }
 
     // Private functions
