@@ -40,12 +40,16 @@ class PostsViewModel @Inject constructor(
         }
 
         val postArgument = post.let { data ->
+
+            val descEncoded = URLEncoder.encode(data.description, StandardCharsets.UTF_8.toString())
+
             if (data.image.isNotEmpty()) {
                 val encoded = URLEncoder.encode(data.image, StandardCharsets.UTF_8.toString())
-                data.copy(image = encoded, user = userArgument)
+                data.copy(image = encoded, user = userArgument, description = descEncoded)
             } else {
-                data.copy(user = userArgument)
+                data.copy(user = userArgument, description = descEncoded)
             }
+
         }
         return postArgument.toJson()
     }
