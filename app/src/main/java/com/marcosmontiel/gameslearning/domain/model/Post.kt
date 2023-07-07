@@ -14,14 +14,16 @@ data class Post(
     var userId: String = "",
 ) {
 
-    fun toJson(): String = Gson().toJson(this.let { data ->
+    fun toJson(): String = Gson().toJson(this.toEncoded())
+
+    private fun toEncoded(): Post = this.let { data ->
         data.copy(
             description = stringEncoder(data.description),
             image = imageEncoder(data.image),
             name = stringEncoder(data.name),
             user = data.user?.toEncoded(),
         )
-    })
+    }
 
     private fun imageEncoder(data: String): String =
         if (data.isEmpty()) data else URLEncoder.encode(data, StandardCharsets.UTF_8.toString())

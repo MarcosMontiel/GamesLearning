@@ -12,13 +12,7 @@ data class User(
     var username: String = "",
 ) {
 
-    fun toJson(): String = Gson().toJson(this.let { data ->
-        data.copy(
-            avatar = imageEncoder(data.avatar),
-            email = stringEncoder(data.email),
-            username = stringEncoder(data.username),
-        )
-    })
+    fun toJson(): String = Gson().toJson(this.toEncoded())
 
     fun toEncoded(): User = this.let { data ->
         data.copy(
