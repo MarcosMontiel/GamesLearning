@@ -142,14 +142,15 @@ fun DetailUserCard(modifier: Modifier, post: Post, background: Color) {
             ) {
 
                 DefaultText(
-                    text = "Nombre de usuario",
+                    text = post.user?.username ?: "Unknown",
                     fontWeight = FontWeight.Normal,
                 )
 
                 DefaultText(
-                    text = post.user?.username ?: "Unknown",
+                    text = post.user?.email ?: "Unknown",
                     color = Gray500,
                     fontWeight = FontWeight.Normal,
+                    style = MaterialTheme.typography.body2
                 )
 
             }
