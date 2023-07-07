@@ -30,6 +30,7 @@ class PostsViewModel @Inject constructor(
     // Functions
 
     fun convertPostToJson(post: Post): String {
+
         val userArgument = post.user?.let { data ->
             if (data.avatar.isNotEmpty()) {
                 val encoded = URLEncoder.encode(data.avatar, StandardCharsets.UTF_8.toString())
@@ -51,7 +52,9 @@ class PostsViewModel @Inject constructor(
             }
 
         }
+
         return postArgument.toJson()
+
     }
 
     // Private functions
