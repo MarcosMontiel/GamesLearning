@@ -143,7 +143,7 @@ fun PostCard(
 
             DefaultText(
                 modifier = Modifier.fillMaxWidth(),
-                text = post.user?.username ?: "not found",
+                text = post.user?.username ?: "unknown user",
                 color = Gray500,
                 style = MaterialTheme.typography.body2,
             )
