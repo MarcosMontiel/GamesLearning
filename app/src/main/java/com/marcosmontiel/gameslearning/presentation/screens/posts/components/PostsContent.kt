@@ -10,6 +10,7 @@ import androidx.compose.material.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
@@ -125,7 +126,7 @@ fun PostCard(
 
             DefaultText(
                 modifier = Modifier.fillMaxWidth(),
-                text = post.name
+                text = post.name,
             )
 
             Spacer(modifier = Modifier.size(8.dp))
@@ -134,7 +135,8 @@ fun PostCard(
                 modifier = Modifier.fillMaxWidth(),
                 text = post.description,
                 color = Gray500,
-                style = MaterialTheme.typography.body2
+                fontWeight = FontWeight.Normal,
+                style = MaterialTheme.typography.body2,
             )
 
             Spacer(modifier = Modifier.size(8.dp))
@@ -143,7 +145,7 @@ fun PostCard(
                 modifier = Modifier.fillMaxWidth(),
                 text = post.user?.username ?: "not found",
                 color = Gray500,
-                style = MaterialTheme.typography.body2
+                style = MaterialTheme.typography.body2,
             )
 
         }
