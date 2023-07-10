@@ -28,7 +28,7 @@ fun PostsContent(
     modifier: Modifier,
     navController: NavHostController,
     paddingValues: PaddingValues,
-    posts: List<Post>
+    posts: List<Post>,
 ) {
     Box(
         modifier = modifier.padding(paddingValues = paddingValues),
@@ -106,7 +106,7 @@ fun PostCard(
             },
         shape = RoundedCornerShape(16.dp),
         backgroundColor = background,
-        elevation = 4.dp
+        elevation = 4.dp,
     ) {
         Column(
             modifier = Modifier
