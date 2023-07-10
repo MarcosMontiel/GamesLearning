@@ -40,7 +40,7 @@ fun PostsContent(
                     modifier = Modifier.fillMaxSize(),
                     image = R.drawable.joystick,
                     title = "No hay publicaciones para mostrar",
-                    subtitle = "Sé el primero en hacerlo"
+                    subtitle = "Sé el primero en hacerlo",
                 )
 
             } else {
@@ -48,7 +48,7 @@ fun PostsContent(
                 PostsRecyclerView(
                     modifier = Modifier.fillMaxWidth(),
                     navController = navController,
-                    posts = posts
+                    posts = posts,
                 )
 
             }
