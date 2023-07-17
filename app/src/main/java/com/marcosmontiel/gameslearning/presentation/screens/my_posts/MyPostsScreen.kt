@@ -11,7 +11,7 @@ import androidx.compose.ui.Modifier
 import androidx.navigation.NavHostController
 import com.marcosmontiel.gameslearning.presentation.components.DefaultFloatingActionButton
 import com.marcosmontiel.gameslearning.presentation.navigation.DetailsRoutes.NewPost
-import com.marcosmontiel.gameslearning.presentation.screens.my_posts.components.MyPostsContent
+import com.marcosmontiel.gameslearning.presentation.screens.my_posts.components.MyPostsView
 
 @Composable
 fun MyPostsScreen(navController: NavHostController) {
@@ -22,7 +22,7 @@ fun MyPostsScreen(navController: NavHostController) {
         topBar = {},
         content = { paddingValues ->
 
-            MyPostsContent(
+            MyPostsView(
                 modifier = Modifier.fillMaxSize(),
                 navController = navController,
                 paddingValues = paddingValues
