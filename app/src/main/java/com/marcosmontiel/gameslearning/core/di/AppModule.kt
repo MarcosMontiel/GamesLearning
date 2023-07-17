@@ -18,6 +18,7 @@ import com.marcosmontiel.gameslearning.domain.repository.ProfileRepository
 import com.marcosmontiel.gameslearning.domain.usecase.auth.*
 import com.marcosmontiel.gameslearning.domain.usecase.post.CreatePost
 import com.marcosmontiel.gameslearning.domain.usecase.post.GetPosts
+import com.marcosmontiel.gameslearning.domain.usecase.post.GetPostsByUser
 import com.marcosmontiel.gameslearning.domain.usecase.post.PostUseCases
 import com.marcosmontiel.gameslearning.domain.usecase.profile.*
 import dagger.Module
@@ -104,6 +105,7 @@ object AppModule {
     fun providePostUseCases(repository: PostRepository): PostUseCases =
         PostUseCases(
             getPosts = GetPosts(repository),
+            getPostsByUser = GetPostsByUser(repository),
             create = CreatePost(repository)
         )
 
