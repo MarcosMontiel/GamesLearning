@@ -67,7 +67,7 @@ class PostRepositoryImpl @Inject constructor(
     }
 
     override fun getPostsByUser(userId: String): Flow<Response<List<Post>>> = callbackFlow {
-        var reference = postsRef.whereEqualTo("userId", userId)
+        val reference = postsRef.whereEqualTo("userId", userId)
         val snapshotListener = reference.addSnapshotListener { snapshot, e ->
             val response = if (snapshot != null) {
 
