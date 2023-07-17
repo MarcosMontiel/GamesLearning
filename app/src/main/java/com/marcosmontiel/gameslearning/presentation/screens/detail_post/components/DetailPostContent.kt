@@ -7,9 +7,9 @@ import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
-import androidx.compose.material.Card
-import androidx.compose.material.Divider
-import androidx.compose.material.MaterialTheme
+import androidx.compose.material.*
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.rounded.ArrowBack
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.livedata.observeAsState
@@ -52,11 +52,9 @@ fun DetailPostContent(
                 .verticalScroll(state = scrollState)
         ) {
 
-            DefaultAsyncImage(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .height(220.dp),
-                shape = RoundedCornerShape(0.dp),
+            HeaderPostData(
+                modifier = Modifier.fillMaxWidth(),
+                navController = navController,
                 image = post.image
             )
 
@@ -90,6 +88,37 @@ fun DetailPostContent(
             )
 
         }
+
+    }
+}
+
+@Composable
+fun HeaderPostData(
+    modifier: Modifier,
+    navController: NavHostController,
+    image: String
+) {
+    Box(modifier = modifier.height(220.dp)) {
+
+        DefaultAsyncImage(
+            modifier = Modifier.fillMaxSize(),
+            shape = RoundedCornerShape(0.dp),
+            image = image,
+            alpha = 0.6f,
+        )
+
+        IconButton(
+            onClick = {
+                navController.popBackStack()
+            },
+            modifier = Modifier.padding(8.dp),
+            content = {
+                Icon(
+                    imageVector = Icons.Rounded.ArrowBack,
+                    contentDescription = "icon back"
+                )
+            }
+        )
 
     }
 }

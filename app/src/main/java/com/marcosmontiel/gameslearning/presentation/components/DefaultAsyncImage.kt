@@ -20,6 +20,7 @@ fun DefaultAsyncImage(
     shape: Shape = CircleShape,
     fraction: Float = 1f,
     color: Color = Gray900,
+    alpha: Float = 1f,
     image: Any
 ) {
     Box(
@@ -34,7 +35,8 @@ fun DefaultAsyncImage(
             modifier = Modifier
                 .clip(shape)
                 .fillMaxSize(fraction = fraction),
-            contentScale = ContentScale.Crop
+            contentScale = ContentScale.Crop,
+            alpha = alpha,
         )
     }
 }
