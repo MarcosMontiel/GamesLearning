@@ -9,6 +9,8 @@ interface PostRepository {
 
     fun getPosts(): Flow<Response<List<Post>>>
 
+    fun getPostsByUser(userId: String): Flow<Response<List<Post>>>
+
     suspend fun create(post: Post, file: File): Response<Boolean>
 
 }

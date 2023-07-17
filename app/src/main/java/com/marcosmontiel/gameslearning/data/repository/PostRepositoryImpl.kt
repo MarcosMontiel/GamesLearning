@@ -66,6 +66,29 @@ class PostRepositoryImpl @Inject constructor(
         }
     }
 
+    override fun getPostsByUser(userId: String): Flow<Response<List<Post>>> = callbackFlow {
+        var reference = postsRef.whereEqualTo("userId", userId)
+        val snapshotListener = reference.addSnapshotListener { snapshot, e ->
+            val response = if (snapshot != null) {
+
+                val posts = snapshot.toObjects(Post::class.java)
+
+                Response.Success(data = posts)
+
+            } else {
+
+                Response.Failure(exception = e)
+
+            }
+
+            trySend(element = response)
+        }
+
+        awaitClose {
+            snapshotListener.remove()
+        }
+    }
+
     override suspend fun create(post: Post, file: File): Response<Boolean> {
         return try {
 
