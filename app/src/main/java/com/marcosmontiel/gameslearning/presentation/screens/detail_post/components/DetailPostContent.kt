@@ -23,6 +23,7 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavHostController
 import com.marcosmontiel.gameslearning.R
 import com.marcosmontiel.gameslearning.domain.model.Post
+import com.marcosmontiel.gameslearning.domain.model.User
 import com.marcosmontiel.gameslearning.presentation.components.DefaultAsyncImage
 import com.marcosmontiel.gameslearning.presentation.components.DefaultIconRes
 import com.marcosmontiel.gameslearning.presentation.components.DefaultImage
@@ -60,10 +61,15 @@ fun DetailPostContent(
 
             Spacer(modifier = Modifier.size(24.dp))
 
-            DetailsPostData(
-                modifier = Modifier.fillMaxWidth(),
-                post = post
-            )
+            if (post.user != null) {
+
+                DetailUserCard(
+                    modifier = Modifier.fillMaxWidth(),
+                    background = Gray800,
+                    user = post.user!!,
+                )
+
+            }
 
             DetailsGameData(
                 modifier = Modifier.fillMaxWidth(),
@@ -124,23 +130,10 @@ fun HeaderPostData(
 }
 
 @Composable
-fun DetailsPostData(modifier: Modifier, post: Post) {
-    Column(modifier = modifier) {
-
-        DetailUserCard(
-            modifier = Modifier.fillMaxWidth(),
-            post = post,
-            background = Gray800
-        )
-
-    }
-}
-
-@Composable
 fun DetailUserCard(
     modifier: Modifier,
-    post: Post,
-    background: Color
+    background: Color,
+    user: User,
 ) {
     Card(
         modifier = modifier
@@ -157,18 +150,16 @@ fun DetailUserCard(
                 .padding(16.dp)
         ) {
 
-            val avatar: String = post.user?.avatar ?: ""
+            if (user.avatar.isEmpty()) {
 
-            if (avatar.isNotEmpty()) {
-
-                DefaultAsyncImage(
-                    modifier = Modifier.size(70.dp),
-                    image = post.user!!.avatar
-                )
+                DefaultImage(modifier = Modifier.size(70.dp))
 
             } else {
 
-                DefaultImage(modifier = Modifier.size(70.dp))
+                DefaultAsyncImage(
+                    modifier = Modifier.size(70.dp),
+                    image = user.avatar
+                )
 
             }
 
@@ -180,12 +171,12 @@ fun DetailUserCard(
             ) {
 
                 DefaultText(
-                    text = post.user?.username ?: "Unknown",
+                    text = user.username,
                     fontWeight = FontWeight.Normal,
                 )
 
                 DefaultText(
-                    text = post.user?.email ?: "Unknown",
+                    text = user.email,
                     color = Gray500,
                     fontWeight = FontWeight.Normal,
                     style = MaterialTheme.typography.body2

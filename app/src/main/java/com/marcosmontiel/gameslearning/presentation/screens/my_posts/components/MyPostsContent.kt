@@ -1,5 +1,6 @@
 package com.marcosmontiel.gameslearning.presentation.screens.my_posts.components
 
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.itemsIndexed
@@ -18,6 +19,7 @@ import com.marcosmontiel.gameslearning.domain.model.Post
 import com.marcosmontiel.gameslearning.presentation.components.DefaultAsyncImage
 import com.marcosmontiel.gameslearning.presentation.components.DefaultEmptyScreen
 import com.marcosmontiel.gameslearning.presentation.components.DefaultText
+import com.marcosmontiel.gameslearning.presentation.navigation.DetailsRoutes
 import com.marcosmontiel.gameslearning.presentation.ui.theme.Gray500
 import com.marcosmontiel.gameslearning.presentation.ui.theme.Gray800
 
@@ -97,7 +99,11 @@ fun MyPostsCard(
     post: Post,
 ) {
     Card(
-        modifier = modifier.fillMaxWidth(),
+        modifier = modifier
+            .fillMaxWidth()
+            .clickable {
+                navController.navigate(DetailsRoutes.DetailPost.createArgs(post = post.toJson()))
+            },
         shape = RoundedCornerShape(16.dp),
         backgroundColor = background,
         elevation = 4.dp,
