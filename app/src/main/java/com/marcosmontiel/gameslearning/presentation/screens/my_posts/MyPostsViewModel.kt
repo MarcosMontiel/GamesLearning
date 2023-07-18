@@ -16,7 +16,7 @@ import javax.inject.Inject
 
 @HiltViewModel
 class MyPostsViewModel @Inject constructor(
-    private val authUseCases: AuthUseCases,
+    authUseCases: AuthUseCases,
     private val postUseCases: PostUseCases,
 ) : ViewModel() {
 
@@ -27,9 +27,18 @@ class MyPostsViewModel @Inject constructor(
     // Response
 
     var postsResponse by mutableStateOf<Response<List<Post>>?>(null)
+    var deleteResponse by mutableStateOf<Response<Boolean>?>(null)
 
     init {
         getMyPosts()
+    }
+
+    // Functions
+
+    fun deletePost(id: String) = viewModelScope.launch {
+        deleteResponse = Response.Loading
+        val response = postUseCases.delete(postId = id)
+        deleteResponse = response
     }
 
     // Private functions

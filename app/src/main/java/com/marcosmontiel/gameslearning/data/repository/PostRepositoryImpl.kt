@@ -33,6 +33,9 @@ class PostRepositoryImpl @Inject constructor(
                 val response = if (snapshot != null) {
 
                     val posts = snapshot.toObjects(Post::class.java)
+                    snapshot.forEachIndexed { index, document ->
+                        posts[index].id = document.id
+                    }
 
                     val usersId: List<String> = posts.map { it.userId }.distinct()
 
@@ -72,6 +75,9 @@ class PostRepositoryImpl @Inject constructor(
             val response = if (snapshot != null) {
 
                 val posts = snapshot.toObjects(Post::class.java)
+                snapshot.forEachIndexed { index, document ->
+                    posts[index].id = document.id
+                }
 
                 Response.Success(data = posts)
 

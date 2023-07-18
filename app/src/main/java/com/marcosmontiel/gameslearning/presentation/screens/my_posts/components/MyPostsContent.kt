@@ -7,21 +7,27 @@ import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Card
 import androidx.compose.material.MaterialTheme
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.rounded.Delete
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
+import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavHostController
 import com.marcosmontiel.gameslearning.R
 import com.marcosmontiel.gameslearning.domain.model.Post
 import com.marcosmontiel.gameslearning.presentation.components.DefaultAsyncImage
+import com.marcosmontiel.gameslearning.presentation.components.DefaultAvatarIconButton
 import com.marcosmontiel.gameslearning.presentation.components.DefaultEmptyScreen
 import com.marcosmontiel.gameslearning.presentation.components.DefaultText
 import com.marcosmontiel.gameslearning.presentation.navigation.DetailsRoutes
+import com.marcosmontiel.gameslearning.presentation.screens.my_posts.MyPostsViewModel
 import com.marcosmontiel.gameslearning.presentation.ui.theme.Gray500
 import com.marcosmontiel.gameslearning.presentation.ui.theme.Gray800
+import com.marcosmontiel.gameslearning.presentation.ui.theme.Red400
 
 @Composable
 fun MyPostsContent(
@@ -94,6 +100,7 @@ fun MyPostsRecyclerView(
 @Composable
 fun MyPostsCard(
     modifier: Modifier,
+    viewModel: MyPostsViewModel = hiltViewModel(),
     navController: NavHostController,
     background: Color,
     post: Post,
@@ -121,6 +128,18 @@ fun MyPostsCard(
                 shape = RoundedCornerShape(8.dp),
                 image = post.image
             )
+
+            Spacer(modifier = Modifier.size(16.dp))
+
+            Row(modifier = Modifier.fillMaxWidth()) {
+
+                Spacer(modifier = Modifier.weight(1f))
+
+                DefaultAvatarIconButton(iconColor = Red400, icon = Icons.Rounded.Delete) {
+                    viewModel.deletePost(id = post.id)
+                }
+
+            }
 
             Spacer(modifier = Modifier.size(16.dp))
 
