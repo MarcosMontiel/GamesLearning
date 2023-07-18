@@ -119,4 +119,16 @@ class PostRepositoryImpl @Inject constructor(
         }
     }
 
+    override suspend fun delete(postId: String): Response<Boolean> {
+        return try {
+
+            postsRef.document(postId).delete().await()
+            Response.Success(data = true)
+
+        } catch (e: Exception) {
+            e.printStackTrace()
+            Response.Failure(exception = e)
+        }
+    }
+
 }

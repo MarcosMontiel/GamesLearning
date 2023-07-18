@@ -16,15 +16,13 @@ import com.marcosmontiel.gameslearning.domain.repository.AuthRepository
 import com.marcosmontiel.gameslearning.domain.repository.PostRepository
 import com.marcosmontiel.gameslearning.domain.repository.ProfileRepository
 import com.marcosmontiel.gameslearning.domain.usecase.auth.*
-import com.marcosmontiel.gameslearning.domain.usecase.post.CreatePost
-import com.marcosmontiel.gameslearning.domain.usecase.post.GetPosts
-import com.marcosmontiel.gameslearning.domain.usecase.post.GetPostsByUser
-import com.marcosmontiel.gameslearning.domain.usecase.post.PostUseCases
+import com.marcosmontiel.gameslearning.domain.usecase.post.*
 import com.marcosmontiel.gameslearning.domain.usecase.profile.*
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
+import kotlinx.coroutines.DelicateCoroutinesApi
 import javax.inject.Named
 import javax.inject.Singleton
 
@@ -80,6 +78,7 @@ object AppModule {
     @Provides
     fun provideAuthRepository(impl: AuthRepositoryImpl): AuthRepository = impl
 
+    @DelicateCoroutinesApi
     @Singleton
     @Provides
     fun providePostRepository(impl: PostRepositoryImpl): PostRepository = impl
@@ -97,7 +96,7 @@ object AppModule {
             getCurrentUser = GetCurrentUser(repository = repository),
             login = Login(repository = repository),
             logout = Logout(repository = repository),
-            register = Register(repository = repository)
+            register = Register(repository = repository),
         )
 
     @Singleton
@@ -106,7 +105,8 @@ object AppModule {
         PostUseCases(
             getPosts = GetPosts(repository),
             getPostsByUser = GetPostsByUser(repository),
-            create = CreatePost(repository)
+            create = CreatePost(repository),
+            delete = DeletePost(repository),
         )
 
     @Singleton
@@ -116,7 +116,7 @@ object AppModule {
             create = Create(repository = repository),
             getCurrentProfile = GetCurrentProfile(repository = repository),
             savePhoto = SavePhoto(repository),
-            update = Update(repository = repository)
+            update = Update(repository = repository),
         )
 
 }
