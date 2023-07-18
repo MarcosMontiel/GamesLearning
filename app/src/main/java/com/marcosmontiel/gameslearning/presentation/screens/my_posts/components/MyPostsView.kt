@@ -9,6 +9,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavHostController
+import com.marcosmontiel.gameslearning.domain.model.Post
 import com.marcosmontiel.gameslearning.domain.model.Response
 import com.marcosmontiel.gameslearning.presentation.components.DefaultProgressIndicator
 import com.marcosmontiel.gameslearning.presentation.screens.my_posts.MyPostsViewModel
@@ -20,7 +21,7 @@ fun MyPostsView(
     navController: NavHostController,
     paddingValues: PaddingValues
 ) {
-    val postsResponse = viewModel.postsResponse
+    val postsResponse: Response<List<Post>>? = viewModel.postsResponse
 
     Box(
         modifier = modifier,

@@ -7,7 +7,6 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Card
 import androidx.compose.material.MaterialTheme
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
@@ -47,7 +46,7 @@ fun MyPostsContent(
                 MyPostsRecyclerView(
                     modifier = Modifier.fillMaxWidth(),
                     navController = navController,
-                    posts = posts
+                    posts = posts,
                 )
 
             }
@@ -60,7 +59,7 @@ fun MyPostsContent(
 fun MyPostsRecyclerView(
     modifier: Modifier,
     navController: NavHostController,
-    posts: List<Post>
+    posts: List<Post>,
 ) {
     LazyColumn(
         modifier = modifier,
@@ -81,7 +80,7 @@ fun MyPostsRecyclerView(
                     ),
                     navController = navController,
                     background = Gray800,
-                    post = post
+                    post = post,
                 )
 
             }
@@ -95,7 +94,7 @@ fun MyPostsCard(
     modifier: Modifier,
     navController: NavHostController,
     background: Color,
-    post: Post
+    post: Post,
 ) {
     Card(
         modifier = modifier.fillMaxWidth(),
@@ -131,17 +130,6 @@ fun MyPostsCard(
                 text = post.description,
                 color = Gray500,
                 fontWeight = FontWeight.Normal,
-                style = MaterialTheme.typography.body2,
-            )
-
-            Spacer(modifier = Modifier.size(8.dp))
-
-            DefaultText(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .wrapContentWidth(Alignment.End),
-                text = post.user?.username ?: "unknown user",
-                color = Gray500,
                 style = MaterialTheme.typography.body2,
             )
 

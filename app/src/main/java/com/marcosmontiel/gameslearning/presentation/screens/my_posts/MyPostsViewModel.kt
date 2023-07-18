@@ -22,7 +22,7 @@ class MyPostsViewModel @Inject constructor(
 
     // Current user data
 
-    private val _currentUser: FirebaseUser = authUseCases.getCurrentUser()!!
+    private val _currentUser: FirebaseUser? = authUseCases.getCurrentUser()
 
     // Response
 
@@ -36,7 +36,7 @@ class MyPostsViewModel @Inject constructor(
 
     private fun getMyPosts() = viewModelScope.launch {
         postsResponse = Response.Loading
-        postUseCases.getPostsByUser(_currentUser.uid).collect { response ->
+        postUseCases.getPostsByUser(userId = _currentUser?.uid ?: "").collect { response ->
             postsResponse = response
         }
     }
