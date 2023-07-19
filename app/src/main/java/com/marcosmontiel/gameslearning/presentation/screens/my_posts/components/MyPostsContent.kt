@@ -24,7 +24,8 @@ import com.marcosmontiel.gameslearning.presentation.components.DefaultAsyncImage
 import com.marcosmontiel.gameslearning.presentation.components.DefaultAvatarIconButton
 import com.marcosmontiel.gameslearning.presentation.components.DefaultEmptyScreen
 import com.marcosmontiel.gameslearning.presentation.components.DefaultText
-import com.marcosmontiel.gameslearning.presentation.navigation.DetailsRoutes
+import com.marcosmontiel.gameslearning.presentation.navigation.DetailsRoutes.DetailPost
+import com.marcosmontiel.gameslearning.presentation.navigation.DetailsRoutes.EditPost
 import com.marcosmontiel.gameslearning.presentation.screens.my_posts.MyPostsViewModel
 import com.marcosmontiel.gameslearning.presentation.ui.theme.Blue400
 import com.marcosmontiel.gameslearning.presentation.ui.theme.Gray500
@@ -111,7 +112,7 @@ fun MyPostsCard(
         modifier = modifier
             .fillMaxWidth()
             .clickable {
-                navController.navigate(DetailsRoutes.DetailPost.createArgs(post = post.toJson()))
+                navController.navigate(DetailPost.createArgs(post = post.toJson()))
             },
         shape = RoundedCornerShape(16.dp),
         backgroundColor = background,
@@ -138,7 +139,7 @@ fun MyPostsCard(
                 Spacer(modifier = Modifier.weight(1f))
 
                 DefaultAvatarIconButton(iconColor = Blue400, icon = Icons.Rounded.Edit) {
-
+                    navController.navigate(route = EditPost.createArgs(post = post.toJson()))
                 }
 
                 Spacer(modifier = Modifier.size(16.dp))

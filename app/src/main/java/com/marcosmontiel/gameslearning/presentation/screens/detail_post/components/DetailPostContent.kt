@@ -117,7 +117,7 @@ fun HeaderPostData(
             onClick = {
                 navController.popBackStack()
             },
-            modifier = Modifier.padding(8.dp),
+            modifier = Modifier.padding(4.dp),
             content = {
                 Icon(
                     imageVector = Icons.Rounded.ArrowBack,
