@@ -9,6 +9,7 @@ import androidx.compose.material.Card
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.rounded.Delete
+import androidx.compose.material.icons.rounded.Edit
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -25,6 +26,7 @@ import com.marcosmontiel.gameslearning.presentation.components.DefaultEmptyScree
 import com.marcosmontiel.gameslearning.presentation.components.DefaultText
 import com.marcosmontiel.gameslearning.presentation.navigation.DetailsRoutes
 import com.marcosmontiel.gameslearning.presentation.screens.my_posts.MyPostsViewModel
+import com.marcosmontiel.gameslearning.presentation.ui.theme.Blue400
 import com.marcosmontiel.gameslearning.presentation.ui.theme.Gray500
 import com.marcosmontiel.gameslearning.presentation.ui.theme.Gray800
 import com.marcosmontiel.gameslearning.presentation.ui.theme.Red400
@@ -134,6 +136,12 @@ fun MyPostsCard(
             Row(modifier = Modifier.fillMaxWidth()) {
 
                 Spacer(modifier = Modifier.weight(1f))
+
+                DefaultAvatarIconButton(iconColor = Blue400, icon = Icons.Rounded.Edit) {
+
+                }
+
+                Spacer(modifier = Modifier.size(16.dp))
 
                 DefaultAvatarIconButton(iconColor = Red400, icon = Icons.Rounded.Delete) {
                     viewModel.deletePost(id = post.id)
