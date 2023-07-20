@@ -106,6 +106,7 @@ object AppModule {
             getPosts = GetPosts(repository),
             getPostsByUser = GetPostsByUser(repository),
             create = CreatePost(repository),
+            update = UpdatePost(repository),
             delete = DeletePost(repository),
         )
 
