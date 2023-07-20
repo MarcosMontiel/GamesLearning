@@ -126,7 +126,8 @@ fun NewPostCardContent(
                 viewModel = viewModel
             )
 
-            DefaultTextField(modifier = Modifier.fillMaxWidth(),
+            DefaultTextField(
+                modifier = Modifier.fillMaxWidth(),
                 isEnabled = state.fieldsStatus,
                 placeholder = "Nombre del juego",
                 value = name,
@@ -143,7 +144,8 @@ fun NewPostCardContent(
 
             Spacer(modifier = Modifier.size(16.dp))
 
-            DefaultTextField(modifier = Modifier.fillMaxWidth(),
+            DefaultTextField(
+                modifier = Modifier.fillMaxWidth(),
                 isEnabled = state.fieldsStatus,
                 placeholder = "Descripción",
                 value = description,
@@ -211,7 +213,7 @@ fun PicturePostContent(
                         },
                     shape = RoundedCornerShape(7.dp),
                     fraction = 0.75f,
-                    image = image
+                    image = image,
                 )
 
             } else {
@@ -226,7 +228,7 @@ fun PicturePostContent(
                         },
                     shape = RoundedCornerShape(7.dp),
                     fraction = 0.75f,
-                    image = R.drawable.placeholder
+                    image = R.drawable.placeholder,
                 )
 
             }

@@ -134,15 +134,14 @@ fun MyPostsCard(
 
             Spacer(modifier = Modifier.size(16.dp))
 
-            Row(modifier = Modifier.fillMaxWidth()) {
-
-                Spacer(modifier = Modifier.weight(1f))
+            Row(
+                modifier = Modifier.fillMaxWidth(),
+                horizontalArrangement = Arrangement.SpaceBetween
+            ) {
 
                 DefaultAvatarIconButton(iconColor = Blue400, icon = Icons.Rounded.Edit) {
                     navController.navigate(route = EditPost.createArgs(post = post.toJson()))
                 }
-
-                Spacer(modifier = Modifier.size(16.dp))
 
                 DefaultAvatarIconButton(iconColor = Red400, icon = Icons.Rounded.Delete) {
                     viewModel.deletePost(id = post.id)
