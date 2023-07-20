@@ -66,15 +66,17 @@ class EditPostViewModel @Inject constructor(
         state = state.copy(
             name = name,
             description = description,
-            publishButtonStatus = areValidFields(),
         )
+
+        state = state.copy(publishButtonStatus = areValidFields())
     }
 
     fun checkedChange(category: String) {
         state = state.copy(
             category = category,
-            publishButtonStatus = areValidFields(),
         )
+
+        state = state.copy(publishButtonStatus = areValidFields())
     }
 
     fun galleryChoose() = viewModelScope.launch {
