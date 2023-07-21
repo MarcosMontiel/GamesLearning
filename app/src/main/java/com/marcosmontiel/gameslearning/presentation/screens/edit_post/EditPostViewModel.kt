@@ -102,9 +102,32 @@ class EditPostViewModel @Inject constructor(
         updateData(post = data)
     }
 
+    // Functions
+
+    fun enableFields() {
+        state = state.copy(
+            fieldsStatus = true,
+            photoButtonStatus = true,
+            publishButtonStatus = true,
+        )
+
+        postResponse = null
+    }
+
     // Private functions
 
+    private fun disableFields() {
+        state = state.copy(
+            fieldsStatus = false,
+            photoButtonStatus = false,
+            publishButtonStatus = false,
+        )
+    }
+
     private fun updateData(post: Post) = viewModelScope.launch {
+
+        disableFields()
+
         postResponse = Response.Loading
 
         postResponse = if (::_file.isInitialized) {
@@ -116,6 +139,7 @@ class EditPostViewModel @Inject constructor(
             postUseCases.update(post = post, file = null)
 
         }
+
     }
 
     private fun areValidFields(): Boolean =

@@ -3,6 +3,7 @@ package com.marcosmontiel.gameslearning.presentation.screens.edit_post.component
 import android.widget.Toast
 import androidx.compose.foundation.layout.Box
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.hilt.navigation.compose.hiltViewModel
@@ -35,12 +36,20 @@ fun EditPostView(
 
                     is Response.Failure -> {
 
+                        viewModel.enableFields()
+
                         val message: String = stateFlow.exception?.message ?: "Unknown exception"
                         Toast.makeText(LocalContext.current, message, Toast.LENGTH_LONG).show()
 
                     }
 
-                    is Response.Success -> {}
+                    is Response.Success -> {
+
+                        LaunchedEffect(Unit) {
+                            navController.popBackStack()
+                        }
+
+                    }
 
                     else -> {}
                 }
