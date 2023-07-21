@@ -131,12 +131,14 @@ class PostRepositoryImpl @Inject constructor(
             var downloadUrl: Uri? = null
 
             if (file != null) {
+
                 val fileUri: Uri = Uri.fromFile(file)
                 val ref = storagePostsRef.child(file.name)
 
                 ref.putFile(fileUri).await()
 
                 downloadUrl = ref.downloadUrl.await()
+
             }
 
             val map: MutableMap<String, Any> = HashMap()
@@ -145,7 +147,9 @@ class PostRepositoryImpl @Inject constructor(
             map["name"] = post.name
 
             if (downloadUrl != null) {
+
                 map["image"] = downloadUrl.toString()
+
             }
 
             postsRef.document(post.id).update(map).await()

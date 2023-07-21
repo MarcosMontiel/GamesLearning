@@ -91,10 +91,32 @@ class EditPostViewModel @Inject constructor(
     }
 
     fun updatePost() {
+        val data = Post(
+            category = state.category,
+            description = state.description,
+            id = post.id,
+            image = post.image,
+            name = state.name,
+        )
 
+        updateData(post = data)
     }
 
     // Private functions
+
+    private fun updateData(post: Post) = viewModelScope.launch {
+        postResponse = Response.Loading
+
+        postResponse = if (::_file.isInitialized) {
+
+            postUseCases.update(post = post, file = _file)
+
+        } else {
+
+            postUseCases.update(post = post, file = null)
+
+        }
+    }
 
     private fun areValidFields(): Boolean =
         state.name.isNotEmpty() && state.description.isNotEmpty() && state.category.isNotEmpty()
