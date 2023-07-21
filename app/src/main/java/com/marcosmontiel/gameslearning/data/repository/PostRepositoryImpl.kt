@@ -125,34 +125,32 @@ class PostRepositoryImpl @Inject constructor(
         }
     }
 
-    override suspend fun update(post: Post, file: File): Response<Boolean> {
+    override suspend fun update(post: Post, file: File?): Response<Boolean> {
         return try {
 
-            val fileUri: Uri = Uri.fromFile(file)
-            val ref = storagePostsRef.child(file.name)
-            ref.putFile(fileUri).await()
+            var downloadUrl: Uri? = null
 
-            val downloadUrl = ref.downloadUrl.await()
+            if (file != null) {
+                val fileUri: Uri = Uri.fromFile(file)
+                val ref = storagePostsRef.child(file.name)
+
+                ref.putFile(fileUri).await()
+
+                downloadUrl = ref.downloadUrl.await()
+            }
+
+            val map: MutableMap<String, Any> = HashMap()
+            map["category"] = post.category
+            map["description"] = post.description
+            map["name"] = post.name
 
             if (downloadUrl != null) {
-
-                val map: MutableMap<String, Any> = HashMap()
-                map["category"] = post.category
-                map["description"] = post.description
-                map["image"] = post.image
-                map["name"] = post.name
-
-                postsRef.document(post.id).update(map).await()
-
-                Response.Success(data = true)
-
-            } else {
-
-                Response.Failure(
-                    exception = Exception("Error: File download URL is null.")
-                )
-
+                map["image"] = downloadUrl.toString()
             }
+
+            postsRef.document(post.id).update(map).await()
+
+            Response.Success(data = true)
 
         } catch (e: Exception) {
             e.printStackTrace()
