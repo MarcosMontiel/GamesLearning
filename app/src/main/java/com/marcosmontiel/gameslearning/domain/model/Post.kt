@@ -9,6 +9,7 @@ data class Post(
     var description: String = "",
     var id: String = "",
     var image: String = "",
+    var imageName: String = "",
     var name: String = "",
     var user: User? = null,
     var userId: String = "",

@@ -96,6 +96,7 @@ class EditPostViewModel @Inject constructor(
             description = state.description,
             id = post.id,
             image = post.image,
+            imageName = post.imageName,
             name = state.name,
         )
 

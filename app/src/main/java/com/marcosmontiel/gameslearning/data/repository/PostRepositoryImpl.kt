@@ -107,6 +107,7 @@ class PostRepositoryImpl @Inject constructor(
             if (downloadUrl != null) {
 
                 post.image = downloadUrl.toString()
+                post.imageName = file.name
                 postsRef.add(post).await()
 
                 Response.Success(data = true)
@@ -128,27 +129,26 @@ class PostRepositoryImpl @Inject constructor(
     override suspend fun update(post: Post, file: File?): Response<Boolean> {
         return try {
 
-            var downloadUrl: Uri? = null
-
-            if (file != null) {
-
-                val fileUri: Uri = Uri.fromFile(file)
-                val ref = storagePostsRef.child(file.name)
-
-                ref.putFile(fileUri).await()
-
-                downloadUrl = ref.downloadUrl.await()
-
-            }
-
             val map: MutableMap<String, Any> = HashMap()
             map["category"] = post.category
             map["description"] = post.description
             map["name"] = post.name
 
-            if (downloadUrl != null) {
+            if (file != null) {
+
+                val fileUri: Uri = Uri.fromFile(file)
+                val ref: StorageReference = storagePostsRef.child(file.name)
+
+                ref.putFile(fileUri).await()
+
+                val downloadUrl: Uri = ref.downloadUrl.await()
+
+                val oldRef: StorageReference = storagePostsRef.child(post.imageName)
+
+                oldRef.delete().await()
 
                 map["image"] = downloadUrl.toString()
+                map["imageName"] = file.name
 
             }
 
