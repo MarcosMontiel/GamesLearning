@@ -7,6 +7,8 @@ import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Card
 import androidx.compose.material.MaterialTheme
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.rounded.FavoriteBorder
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -14,13 +16,16 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
+import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavHostController
 import com.marcosmontiel.gameslearning.R
 import com.marcosmontiel.gameslearning.domain.model.Post
 import com.marcosmontiel.gameslearning.presentation.components.DefaultAsyncImage
+import com.marcosmontiel.gameslearning.presentation.components.DefaultAvatarIconButton
 import com.marcosmontiel.gameslearning.presentation.components.DefaultEmptyScreen
 import com.marcosmontiel.gameslearning.presentation.components.DefaultText
 import com.marcosmontiel.gameslearning.presentation.navigation.DetailsRoutes.DetailPost
+import com.marcosmontiel.gameslearning.presentation.screens.posts.PostsViewModel
 import com.marcosmontiel.gameslearning.presentation.ui.theme.Gray500
 import com.marcosmontiel.gameslearning.presentation.ui.theme.Gray800
 
@@ -95,6 +100,7 @@ fun PostsRecyclerView(
 @Composable
 fun PostCard(
     modifier: Modifier,
+    viewModel: PostsViewModel = hiltViewModel(),
     navController: NavHostController,
     background: Color,
     post: Post
@@ -125,10 +131,34 @@ fun PostCard(
 
             Spacer(modifier = Modifier.size(16.dp))
 
-            DefaultText(
+            Row(
                 modifier = Modifier.fillMaxWidth(),
-                text = post.name,
-            )
+                horizontalArrangement = Arrangement.SpaceBetween,
+                verticalAlignment = Alignment.CenterVertically,
+            ) {
+
+                DefaultText(text = post.name)
+
+                Row(verticalAlignment = Alignment.CenterVertically) {
+
+                    DefaultAvatarIconButton(
+                        borderColor = Gray800,
+                        icon = Icons.Rounded.FavoriteBorder
+                    ) {
+
+                        viewModel.like(post)
+
+                    }
+
+                    DefaultText(
+                        text = post.likes.size.toString(),
+                        fontWeight = FontWeight.Normal,
+                        style = MaterialTheme.typography.body2
+                    )
+
+                }
+
+            }
 
             Spacer(modifier = Modifier.size(8.dp))
 

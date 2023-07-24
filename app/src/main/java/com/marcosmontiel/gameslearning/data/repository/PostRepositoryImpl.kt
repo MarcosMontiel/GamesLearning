@@ -179,7 +179,7 @@ class PostRepositoryImpl @Inject constructor(
         return try {
 
             val map: MutableMap<String, Any> = HashMap()
-            map["likes"] = FieldValue.arrayUnion(userId)
+            map["likes"] = FieldValue.arrayRemove(userId)
 
             postsRef.document(postId).update(map).await()
             Response.Success(data = true)
@@ -194,7 +194,7 @@ class PostRepositoryImpl @Inject constructor(
         return try {
 
             val map: MutableMap<String, Any> = HashMap()
-            map["likes"] = FieldValue.arrayRemove(userId)
+            map["likes"] = FieldValue.arrayUnion(userId)
 
             postsRef.document(postId).update(map).await()
             Response.Success(data = true)
