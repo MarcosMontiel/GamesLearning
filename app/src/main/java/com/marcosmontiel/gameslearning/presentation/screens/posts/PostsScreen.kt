@@ -7,6 +7,8 @@ import androidx.compose.material.rememberScaffoldState
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.navigation.NavHostController
+import com.marcosmontiel.gameslearning.presentation.screens.posts.components.DeleteLikeView
+import com.marcosmontiel.gameslearning.presentation.screens.posts.components.LikeView
 import com.marcosmontiel.gameslearning.presentation.screens.posts.components.PostsView
 
 @Composable
@@ -27,4 +29,8 @@ fun PostsScreen(navController: NavHostController) {
         },
         bottomBar = {}
     )
+
+    LikeView(modifier = Modifier.fillMaxSize())
+
+    DeleteLikeView(modifier = Modifier.fillMaxSize())
 }

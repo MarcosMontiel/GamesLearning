@@ -20,9 +20,25 @@ class PostsViewModel @Inject constructor(
     // Response
 
     var postsResponse by mutableStateOf<Response<List<Post>>?>(null)
+    var dislikeResponse by mutableStateOf<Response<Boolean>?>(null)
+    var likeResponse by mutableStateOf<Response<Boolean>?>(null)
 
     init {
         getAllPosts()
+    }
+
+    // Events
+
+    fun deleteLike(postId: String, userId: String) = viewModelScope.launch {
+        dislikeResponse = Response.Loading
+        val response = postUseCases.deleteLike(postId = postId, userId = userId)
+        dislikeResponse = response
+    }
+
+    fun like(postId: String, userId: String) = viewModelScope.launch {
+        likeResponse = Response.Loading
+        val response = postUseCases.like(postId = postId, userId = userId)
+        likeResponse = response
     }
 
     // Private functions
