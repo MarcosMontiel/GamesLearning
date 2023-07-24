@@ -10,6 +10,7 @@ data class Post(
     var id: String = "",
     var image: String = "",
     var imageName: String = "",
+    var likes: ArrayList<String> = ArrayList(),
     var name: String = "",
     var user: User? = null,
     var userId: String = "",

@@ -17,4 +17,8 @@ interface PostRepository {
 
     suspend fun delete(postId: String): Response<Boolean>
 
+    suspend fun deleteLike(postId: String, userId: String): Response<Boolean>
+
+    suspend fun like(postId: String, userId: String): Response<Boolean>
+
 }

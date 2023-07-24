@@ -6,4 +6,6 @@ data class PostUseCases(
     val create: CreatePost,
     val update: UpdatePost,
     val delete: DeletePost,
+    val deleteLike: DeleteLikePost,
+    val like: LikePost,
 )

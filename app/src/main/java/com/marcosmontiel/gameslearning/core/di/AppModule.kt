@@ -108,6 +108,8 @@ object AppModule {
             create = CreatePost(repository),
             update = UpdatePost(repository),
             delete = DeletePost(repository),
+            deleteLike = DeleteLikePost(repository),
+            like = LikePost(repository),
         )
 
     @Singleton

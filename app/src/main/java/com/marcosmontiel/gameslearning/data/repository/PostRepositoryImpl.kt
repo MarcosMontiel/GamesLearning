@@ -2,6 +2,7 @@ package com.marcosmontiel.gameslearning.data.repository
 
 import android.net.Uri
 import com.google.firebase.firestore.CollectionReference
+import com.google.firebase.firestore.FieldValue
 import com.google.firebase.storage.StorageReference
 import com.marcosmontiel.gameslearning.core.Constants.POSTS
 import com.marcosmontiel.gameslearning.core.Constants.PROFILES
@@ -166,6 +167,36 @@ class PostRepositoryImpl @Inject constructor(
         return try {
 
             postsRef.document(postId).delete().await()
+            Response.Success(data = true)
+
+        } catch (e: Exception) {
+            e.printStackTrace()
+            Response.Failure(exception = e)
+        }
+    }
+
+    override suspend fun deleteLike(postId: String, userId: String): Response<Boolean> {
+        return try {
+
+            val map: MutableMap<String, Any> = HashMap()
+            map["likes"] = FieldValue.arrayUnion(userId)
+
+            postsRef.document(postId).update(map).await()
+            Response.Success(data = true)
+
+        } catch (e: Exception) {
+            e.printStackTrace()
+            Response.Failure(exception = e)
+        }
+    }
+
+    override suspend fun like(postId: String, userId: String): Response<Boolean> {
+        return try {
+
+            val map: MutableMap<String, Any> = HashMap()
+            map["likes"] = FieldValue.arrayRemove(userId)
+
+            postsRef.document(postId).update(map).await()
             Response.Success(data = true)
 
         } catch (e: Exception) {
