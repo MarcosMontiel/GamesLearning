@@ -15,7 +15,7 @@ import javax.inject.Inject
 
 @HiltViewModel
 class PostsViewModel @Inject constructor(
-    private val authUseCases: AuthUseCases,
+    authUseCases: AuthUseCases,
     private val postUseCases: PostUseCases,
 ) : ViewModel() {
 
