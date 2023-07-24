@@ -21,7 +21,7 @@ class PostsViewModel @Inject constructor(
 
     // Current user data
 
-    private val _currentUserId = authUseCases.getCurrentUser()?.uid ?: ""
+    val currentUserId = authUseCases.getCurrentUser()?.uid ?: ""
 
     // Response
 
@@ -37,7 +37,7 @@ class PostsViewModel @Inject constructor(
 
     fun like(post: Post) {
 
-        if (post.likes.contains(_currentUserId)) {
+        if (post.likes.contains(currentUserId)) {
 
             deleteLike(post.id)
 
@@ -53,13 +53,13 @@ class PostsViewModel @Inject constructor(
 
     private fun deleteLike(postId: String) = viewModelScope.launch {
         dislikeResponse = Response.Loading
-        val response = postUseCases.deleteLike(postId = postId, userId = _currentUserId)
+        val response = postUseCases.deleteLike(postId = postId, userId = currentUserId)
         dislikeResponse = response
     }
 
     private fun addLike(postId: String) = viewModelScope.launch {
         likeResponse = Response.Loading
-        val response = postUseCases.like(postId = postId, userId = _currentUserId)
+        val response = postUseCases.like(postId = postId, userId = currentUserId)
         likeResponse = response
     }
 

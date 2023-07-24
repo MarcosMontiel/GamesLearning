@@ -8,6 +8,7 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Card
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.rounded.Favorite
 import androidx.compose.material.icons.rounded.FavoriteBorder
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -141,9 +142,12 @@ fun PostCard(
 
                 Row(verticalAlignment = Alignment.CenterVertically) {
 
+                    val hasLike = post.likes.contains(viewModel.currentUserId)
+                    val icon = if (hasLike) Icons.Rounded.Favorite else Icons.Rounded.FavoriteBorder
+
                     DefaultAvatarIconButton(
                         borderColor = Gray800,
-                        icon = Icons.Rounded.FavoriteBorder
+                        icon = icon,
                     ) {
 
                         viewModel.like(post)
